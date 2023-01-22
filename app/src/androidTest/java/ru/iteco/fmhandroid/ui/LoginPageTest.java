@@ -13,11 +13,12 @@ import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.LoginPage;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
-public class LoginPageTest extends BeforeTestLogin {
+public class LoginPageTest extends BasePage {
     @Test
     public void A_loginPageUITest() {
         pause();
@@ -77,7 +78,7 @@ public class LoginPageTest extends BeforeTestLogin {
 
         pause();
         HeaderPage.logoView.check(matches(isDisplayed()));
-        logout();
+        BeforeTestLogin.logout();
     }
 
     @Test
@@ -85,14 +86,14 @@ public class LoginPageTest extends BeforeTestLogin {
         pause();
         LoginPage.titleTextElement.check(matches(isDisplayed()));
         LoginPage.titleTextElement.check(matches(withText("Авторизация")));
-        login();
+        BeforeTestLogin.login();
     }
 
     @Test
     public void G_shouldStartAppOnMainPageWhenAutorized(){
         pause();
         HeaderPage.mainMenuButton.check(matches(isDisplayed()));
-        logout();
+        BeforeTestLogin.logout();
     }
 
 }

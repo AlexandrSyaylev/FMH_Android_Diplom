@@ -41,7 +41,12 @@ public class AddNewNewsPage extends BasePage{
 
     public static ViewInteraction noSaveChangesMessage = onView(withText("Изменения не будут сохранены. Вы действительно хотите выйти?"));
     public static ViewInteraction noSaveChangesCancelButton = onView(withText("Отмена"));
-    public static ViewInteraction noSaveChangesOkButton = onView(withText("ОK"));
+    public static ViewInteraction noSaveChangesOkButton = onView(withId(android.R.id.button1));
 
-    public static ViewInteraction calendarView = onView(withId(R.id.custom));
+    public static ViewInteraction calendarOkButton = onView(withId(android.R.id.button1));
+    public static ViewInteraction calendarCancelButton = onView(withId(android.R.id.button2));
+    public static ViewInteraction calendarView = onView(withId(android.R.id.custom));
+    public static ViewInteraction timeHeader = onView(withId(android.R.id.custom));
+    public static ViewInteraction timeOKButton = onView(withId(android.R.id.button1));
+    public static ViewInteraction timeCancelButton = onView(withId(android.R.id.button2));
 }
