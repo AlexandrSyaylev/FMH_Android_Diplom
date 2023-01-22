@@ -25,16 +25,17 @@ import org.junit.BeforeClass;
 import org.junit.Rule;
 import org.junit.runner.RunWith;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 
-@RunWith(AndroidJUnit4.class)
+@RunWith(AllureAndroidJUnit4.class)
 public class BeforeTestLogin extends BasePage {
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
 
-//    @Before
+    @Before
     public static void login() {
         pause();
         loginFieldAsTextField.perform(typeText("login2"));
@@ -43,7 +44,7 @@ public class BeforeTestLogin extends BasePage {
         onView(isRoot()).perform(waitFor(2000));
     }
 
-//    @After
+    @After
     public static void logout() {
         lkButton.perform(click());
         logoutButton.perform(click());

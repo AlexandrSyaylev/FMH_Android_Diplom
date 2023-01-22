@@ -60,7 +60,14 @@ public class ClaimPageTest extends BeforeTestLogin{
 
     @Test
     public void cardClaimShouldHaveRequiredFields(){
-        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click());
+        //открываем заявку без комментариев
+        ClaimPage.filterButton.perform(click());
+        onView(withText("Открыта")).perform(click());
+        onView(withText("В работе")).perform(click());
+        onView(withText("Отмененные")).perform(click());
+        onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click());
+        pauseShort();
+        onView(withIndex(withId(R.id.claim_list_card), 2)).perform(click());
         pauseShort();
         ClaimCard.claimThemeTitleFull.check(matches(isDisplayed()));
         ClaimCard.claimThemeTitleTextFull.check(matches(isDisplayed()));
@@ -77,6 +84,7 @@ public class ClaimPageTest extends BeforeTestLogin{
         ClaimCard.claimCreateDate.check(matches(isDisplayed()));
         ClaimCard.claimCreateTime.check(matches(isDisplayed()));
         ClaimCard.claimCommentBlock.check(matches(isDisplayed()));
+        ClaimCard.claimCreateTime.perform(customSwipeUp());
         ClaimCard.claimCommentAddButton.check(matches(isDisplayed()));
         ClaimCard.claimCloseButton.check(matches(isDisplayed()));
         ClaimCard.claimStatusButton.check(matches(isDisplayed()));

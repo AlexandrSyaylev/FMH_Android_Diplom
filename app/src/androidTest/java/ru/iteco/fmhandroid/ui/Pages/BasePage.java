@@ -111,7 +111,7 @@ public class BasePage {
     }
 
     public static ViewAction customSwipeUp() {
-        return new GeneralSwipeAction(Swipe.FAST, GeneralLocation.BOTTOM_CENTER,GeneralLocation.TOP_CENTER, Press.FINGER);
+        return new GeneralSwipeAction(Swipe.FAST, GeneralLocation.BOTTOM_CENTER,GeneralLocation.TOP_RIGHT, Press.FINGER);
     }
 
     public static void clickBack() {

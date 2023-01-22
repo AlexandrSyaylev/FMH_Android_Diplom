@@ -105,6 +105,5 @@ dependencies {
     compileOnly "org.projectlombok:lombok:1.16.18"
     androidTestImplementation "org.projectlombok:lombok:1.16.18"
     androidTestImplementation "androidx.test.uiautomator:uiautomator:2.2.0"
-
-
+    androidTestImplementation "io.qameta.allure:allure-kotlin-android:2.0.0"
 }
