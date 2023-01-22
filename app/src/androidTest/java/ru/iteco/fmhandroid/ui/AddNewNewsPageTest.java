@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,7 +17,7 @@ import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
-public class AddNewNewsPageTest extends BeforeTestLogin{
+public class AddNewNewsPageTest extends BeforeTestLogin {
     @Before
     public void openNewNewsPage() {
 //        login();
@@ -28,10 +27,6 @@ public class AddNewNewsPageTest extends BeforeTestLogin{
         pauseShort();
         NewsPage.controlPanelButton.perform(click());
         NewsPage.addNewNewsButton.perform(click());
-    }
-    @After
-    public void exit(){
-//        logout();
     }
 
     @Test

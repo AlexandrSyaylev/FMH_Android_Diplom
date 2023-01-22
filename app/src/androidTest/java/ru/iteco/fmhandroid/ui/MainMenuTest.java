@@ -33,6 +33,5 @@ public class MainMenuTest extends BeforeTestLogin{
         clickBack();
 
         logout();
-
     }
 }

@@ -27,10 +27,12 @@ public class MainPageTest extends BeforeTestLogin{
     public void openPage(){
         login();
     }
+
     @After
     public void logoutUser(){
         logout();
     }
+
     @Test
     public void headerHasRequiredElements() {
         pause();
@@ -75,10 +77,6 @@ public class MainPageTest extends BeforeTestLogin{
     public void shouldShowAndHideDescriptionFieldWhenTapNews(){
         MainPage.containerNewsHeader.perform(click());
         onView(withIndex(withId(R.id.news_item_description_text_view), 1)).check(matches(isDisplayed()));
-
-//        MainPage.containerNewsHeader.perform(click());
-//        NewsCard.newsDescription.check(matches(not(isDisplayed())));
-
     }
 
     @Test

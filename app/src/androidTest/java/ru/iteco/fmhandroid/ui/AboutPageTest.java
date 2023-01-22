@@ -18,7 +18,6 @@ import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 public class AboutPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveRequiredUIElements(){
-        login();
         HeaderPage.mainMenuButton.perform(click());
         MainMenuPage.aboutPageButton.perform(click());
         onView(isRoot()).perform(waitFor(1000));
@@ -51,6 +50,5 @@ public class AboutPageTest extends BeforeTestLogin {
         AboutPage.companyId.check(matches(withText(AboutPage.companyInfo)));
 
         AboutPage.backButton.perform(click());
-        logout();
     }
 }

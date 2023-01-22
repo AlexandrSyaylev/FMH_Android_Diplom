@@ -30,7 +30,7 @@ public class AddNewClaimPage extends BasePage{
     public static ViewInteraction saveButton = onView(withId(R.id.save_button));
     public static ViewInteraction cancelButton = onView(withId(R.id.cancel_button));
 
-    public static ViewInteraction noSaveChangesMessage = onView(withId(R.id.message));
+    public static ViewInteraction noSaveChangesMessage = onView(withText("Изменения не будут сохранены. Вы действительно хотите выйти?"));
     public static ViewInteraction noSaveChangesCancelButton = onView(withText("Отмена"));
     public static ViewInteraction noSaveChangesOkButton = onView(withText("OK"));
 

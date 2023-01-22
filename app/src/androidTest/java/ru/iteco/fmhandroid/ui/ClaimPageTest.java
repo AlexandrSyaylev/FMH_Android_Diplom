@@ -27,10 +27,6 @@ public class ClaimPageTest extends BeforeTestLogin{
         MainMenuPage.claimPageButton.perform(click());
         pauseShort();
     }
-    @After
-    public void exit(){
-//        logout();
-    }
 
     @Test
     public void shouldHaveRequiredElements(){

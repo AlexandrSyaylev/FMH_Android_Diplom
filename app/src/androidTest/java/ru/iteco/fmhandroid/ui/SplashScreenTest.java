@@ -5,9 +5,10 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 
 import org.junit.Test;
 
+import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.SplashScreenPage;
 
-public class SplashScreenTest extends BeforeTestLogin{
+public class SplashScreenTest extends BasePage {
     @Test
     public void shouldHaveRequiredUIElements(){
         SplashScreenPage.imageId.check(matches(isDisplayed()));

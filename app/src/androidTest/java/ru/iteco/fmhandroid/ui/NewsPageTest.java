@@ -93,5 +93,9 @@ public class NewsPageTest extends BeforeTestLogin{
         clickBack();
         NewsPage.titleNewsHeader.check(matches(isDisplayed()));
     }
-    //header check
+
+    @Test
+    public void shouldHaveHeader(){
+        headerCheck();
+    }
 }
