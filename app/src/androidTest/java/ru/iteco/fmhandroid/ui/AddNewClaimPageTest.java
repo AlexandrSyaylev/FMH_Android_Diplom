@@ -20,7 +20,6 @@ import ru.iteco.fmhandroid.ui.Pages.MainPage;
 public class AddNewClaimPageTest extends BeforeTestLogin {
     @Before
     public void openNewNewsPage() {
-        pause();
         MainPage.claimAddNewButton.perform(click());
         pauseShort();
     }

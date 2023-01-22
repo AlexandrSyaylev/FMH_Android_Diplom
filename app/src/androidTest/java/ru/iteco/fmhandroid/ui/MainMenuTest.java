@@ -15,7 +15,6 @@ public class MainMenuTest extends BeforeTestLogin{
 
     @Test
     public void menuShouldHaveRequiredElements() {
-        login();
         HeaderPage.mainMenuButton.perform(click());
 
         MainMenuPage.mainPageButton.check(matches(isDisplayed()));
@@ -31,7 +30,5 @@ public class MainMenuTest extends BeforeTestLogin{
         MainMenuPage.claimPageButton.check(matches(withText(MainMenuPage.claimPageTextRu)));
 
         clickBack();
-
-        logout();
     }
 }

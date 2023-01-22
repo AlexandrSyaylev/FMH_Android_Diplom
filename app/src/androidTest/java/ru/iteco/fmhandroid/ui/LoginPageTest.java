@@ -10,14 +10,17 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 
+import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.LoginPage;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+@RunWith(AllureAndroidJUnit4.class)
 public class LoginPageTest extends BasePage {
     @Test
     public void A_loginPageUITest() {

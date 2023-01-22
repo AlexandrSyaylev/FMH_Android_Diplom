@@ -9,7 +9,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,15 +20,9 @@ import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 public class NewsPageTest extends BeforeTestLogin{
     @Before
     public void openNewsPage() {
-//        login();
-        pause();
         HeaderPage.mainMenuButton.perform(click());
         MainMenuPage.newsPageButton.perform(click());
         pauseShort();
-    }
-    @After
-    public void exit(){
-//        logout();
     }
 
     @Test

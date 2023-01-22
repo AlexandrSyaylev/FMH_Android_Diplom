@@ -23,16 +23,6 @@ import ru.iteco.fmhandroid.ui.Pages.MainPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsCard;
 
 public class MainPageTest extends BeforeTestLogin{
-    @Before
-    public void openPage(){
-        login();
-    }
-
-    @After
-    public void logoutUser(){
-        logout();
-    }
-
     @Test
     public void headerHasRequiredElements() {
         pause();

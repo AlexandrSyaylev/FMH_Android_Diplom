@@ -21,8 +21,6 @@ import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 public class ClaimPageTest extends BeforeTestLogin{
     @Before
     public void openClaimPage() {
-//        login();
-        pause();
         HeaderPage.mainMenuButton.perform(click());
         MainMenuPage.claimPageButton.perform(click());
         pauseShort();

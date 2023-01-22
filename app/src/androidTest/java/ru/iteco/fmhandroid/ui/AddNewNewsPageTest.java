@@ -20,8 +20,6 @@ import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 public class AddNewNewsPageTest extends BeforeTestLogin {
     @Before
     public void openNewNewsPage() {
-//        login();
-        pause();
         HeaderPage.mainMenuButton.perform(click());
         MainMenuPage.newsPageButton.perform(click());
         pauseShort();

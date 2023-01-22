@@ -19,7 +19,6 @@ import ru.iteco.fmhandroid.ui.Pages.ThematicPage;
 public class ThematicPageTest extends BeforeTestLogin{
     @Before
     public void openPage(){
-        pause();
         HeaderPage.thematicButton.perform(click());
         pauseShort();
     }
