@@ -113,6 +113,8 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.noSaveChangesCancelButton.perform(click());
         pauseShort();
         AddNewNewsPage.titleHeader.check(matches(isDisplayed()));
+        clickBack();
+
     }
 
     @Test

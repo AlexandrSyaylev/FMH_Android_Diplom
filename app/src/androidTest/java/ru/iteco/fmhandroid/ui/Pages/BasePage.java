@@ -1,6 +1,7 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 
+import static android.content.Context.*;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -8,10 +9,13 @@ import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import android.content.Context;
 import android.os.IBinder;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 
+import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.Root;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
@@ -21,12 +25,15 @@ import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.GeneralSwipeAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Swipe;
+import androidx.test.uiautomator.UiDevice;
 
 import com.google.android.material.textfield.TextInputLayout;
 
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+
+import java.io.IOException;
 
 public class BasePage {
 
@@ -114,9 +121,20 @@ public class BasePage {
         return new GeneralSwipeAction(Swipe.FAST, GeneralLocation.BOTTOM_CENTER,GeneralLocation.TOP_RIGHT, Press.FINGER);
     }
 
+    public boolean isKeyboardOpenedShellCheck() {
+        String checkKeyboardCmd = "dumpsys input_method | grep mInputShown";
+        try {
+            return UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
+                    .executeShellCommand(checkKeyboardCmd).contains("mInputShown=true");
+        } catch (IOException e) {
+            throw new RuntimeException("Keyboard check failed",e);
+        }
+    }
+
     public static void clickBack() {
         onView(isRoot()).perform(pressBack());
+        pauseShort();
     }
-    public static void pause() {onView(isRoot()).perform(waitFor(7000));}
+    public static void pause() {onView(isRoot()).perform(waitFor(9000));}
     public static void pauseShort() {onView(isRoot()).perform(waitFor(1500));}
 }

@@ -2,6 +2,7 @@ package ru.iteco.fmhandroid.ui;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
@@ -9,23 +10,28 @@ import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
+import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;
 
 public class AddNewClaimPageTest extends BeforeTestLogin {
-    @Before
-    public void openNewNewsPage() {
+    public void openNewClaimPage() {
         MainPage.claimAddNewButton.perform(click());
         pauseShort();
     }
 
+
+
     @Test
     public void shouldHaveRequiredElements(){
+        openNewClaimPage();
         AddNewClaimPage.titleHeader.check(matches(isDisplayed()));
         AddNewClaimPage.subTitleHeader.check(matches(isDisplayed()));
         AddNewClaimPage.titleField.check(matches(isDisplayed()));
@@ -52,17 +58,14 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.dateField.check(matches(withHint("Дата")));
         AddNewClaimPage.timeField.check(matches(withHint("Время")));
         AddNewClaimPage.descriptionField.check(matches(withHint("Описание")));
-    }
-
-    @Test
-    public void shouldOpenClaimPageWhenTapBack(){
         clickBack();
-        pauseShort();
-        ClaimPage.titleClaimHeader.check(matches(isDisplayed()));
     }
 
     @Test
     public void shouldShowPopupWhenTapCancelButton(){
+        openNewClaimPage();
+        AddNewClaimPage.titleField.perform(click());
+        AddNewClaimPage.titleField.perform(closeSoftKeyboard());
         AddNewClaimPage.cancelButton.perform(click());
         AddNewClaimPage.noSaveChangesMessage.check(matches(isDisplayed()));
         AddNewClaimPage.noSaveChangesMessage.check(matches(withText("Изменения не будут сохранены. Вы действительно хотите выйти?")));
@@ -77,10 +80,12 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.noSaveChangesCancelButton.perform(click());
         pauseShort();
         AddNewClaimPage.titleHeader.check(matches(isDisplayed()));
+        clickBack();
     }
 
     @Test
     public void shouldOpenMainPageIfTapOkButtonOnPopup(){
+        openNewClaimPage();
         AddNewClaimPage.cancelButton.perform(click());
         AddNewClaimPage.noSaveChangesOkButton.perform(click());
         pauseShort();
@@ -89,6 +94,7 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
 
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
+        openNewClaimPage();
         AddNewClaimPage.dateField.perform(click());
         pauseShort();
         AddNewClaimPage.calendarView.check(matches(isDisplayed()));
@@ -96,10 +102,13 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.calendarOkButton.check(matches(isDisplayed()));
         AddNewClaimPage.calendarCancelButton.check(matches(isClickable()));
         AddNewClaimPage.calendarOkButton.check(matches(isClickable()));
+        clickBack();
+        clickBack();
     }
 
     @Test
     public void shouldOpenClockWhenTapTimeField(){
+        openNewClaimPage();
         AddNewClaimPage.timeField.perform(click());
         pauseShort();
         AddNewClaimPage.timeHeader.check(matches(isDisplayed()));
@@ -107,5 +116,18 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.timeOKButton.check(matches(isDisplayed()));
         AddNewClaimPage.timeOKButton.check(matches(isClickable()));
         AddNewClaimPage.timeCancelButton.check(matches(isClickable()));
+        clickBack();
+        clickBack();
+    }
+
+    @Test
+    public void shouldOpenClaimPageWhenTapBack(){
+        HeaderPage.mainMenuButton.perform(click());
+        MainMenuPage.claimPageButton.perform(click());
+        ClaimPage.addNewClaimButton.perform(click());
+        clickBack();
+        pauseShort();
+        ClaimPage.titleClaimHeader.check(matches(isDisplayed()));
+        clickBack();
     }
 }

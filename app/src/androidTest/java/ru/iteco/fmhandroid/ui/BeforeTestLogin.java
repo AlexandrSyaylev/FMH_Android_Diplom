@@ -8,6 +8,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 import static ru.iteco.fmhandroid.ui.Pages.HeaderPage.lkButton;
 import static ru.iteco.fmhandroid.ui.Pages.LkMenuPage.logoutButton;
@@ -28,15 +29,17 @@ import org.junit.runner.RunWith;
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 
 @RunWith(AllureAndroidJUnit4.class)
+//@RunWith(AndroidJUnit4.class)
 public class BeforeTestLogin extends BasePage {
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
 
     @Before
-    public static void login() {
+    public void login() {
         pause();
         loginFieldAsTextField.perform(typeText("login2"));
         passwordFieldAsTextField.perform(typeText("password2"));
@@ -45,10 +48,11 @@ public class BeforeTestLogin extends BasePage {
     }
 
     @After
-    public static void logout() {
+    public void logout() {
         lkButton.perform(click());
         logoutButton.perform(click());
     }
+
     public static void headerCheck(){
         HeaderPage.mainMenuButton.check(matches(isDisplayed()));
         HeaderPage.logoView.check(matches(isDisplayed()));
@@ -61,4 +65,16 @@ public class BeforeTestLogin extends BasePage {
         lkButton.check(matches(isClickable()));
     }
 
+    public static void menuContainCheck(){
+        HeaderPage.mainMenuButton.perform(click());
+        MainMenuPage.mainPageButton.check(matches(isDisplayed()));
+        MainMenuPage.mainPageButton.check(matches(withText(MainMenuPage.mainPageTextRu)));
+        MainMenuPage.newsPageButton.check(matches(isDisplayed()));
+        MainMenuPage.newsPageButton.check(matches(withText(MainMenuPage.NewsPageTextRu)));
+        MainMenuPage.aboutPageButton.check(matches(isDisplayed()));
+        MainMenuPage.aboutPageButton.check(matches(withText(MainMenuPage.aboutPageTextRu)));
+        MainMenuPage.claimPageButton.check(matches(isDisplayed()));
+        MainMenuPage.claimPageButton.check(matches(withText(MainMenuPage.claimPageTextRu)));
+        clickBack();
+    }
 }

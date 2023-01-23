@@ -11,11 +11,18 @@ import static org.hamcrest.CoreMatchers.not;
 
 import org.junit.Test;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Step;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.ui.Pages.AboutPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 
 public class AboutPageTest extends BeforeTestLogin {
+    @Description("На странице О приложении представлены необходимые элементы")
+    @Story("Проверка Страницы о Приложении")
+    @Step("п124 - 129, 132,133, 137 На странице О приложении представлен Хедер \n -" +
+            "На странице представлен текст (знак копирайт)\"Айтеко , 2022\"")
     @Test
     public void shouldHaveRequiredUIElements(){
         HeaderPage.mainMenuButton.perform(click());
