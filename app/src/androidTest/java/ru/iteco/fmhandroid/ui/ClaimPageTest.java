@@ -12,7 +12,11 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Step;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimCard;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
@@ -26,6 +30,9 @@ public class ClaimPageTest extends BeforeTestLogin{
         pauseShort();
     }
 
+    @Description("Проверка страницы Заявки")
+    @Story("Проверка страницы Заявки")
+    @Step("п141-146, 148,150 На странице Заявки представлен заголовок Заявки")
     @Test
     public void shouldHaveRequiredElements(){
         ClaimPage.titleClaimHeader.check(matches(isDisplayed()));
@@ -49,6 +56,9 @@ public class ClaimPageTest extends BeforeTestLogin{
         onView(withIndex(withId(R.id.plan_date_label_material_text_view), 0)).check(matches(withText("Плановая дата")));
     }
 
+    @Description("Проверка страницы Заявки")
+    @Story("Проверка страницы Заявки")
+    @Step("п70,71,73,74 При нажатии на икноку меню на Главной Странице появляется ракрывающееся меню")
     @Test
     public void shouldOpenClaimCardWenTapClaim(){
         onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click());
@@ -56,6 +66,9 @@ public class ClaimPageTest extends BeforeTestLogin{
         ClaimCard.claimThemeTitleFull.check(matches(isDisplayed()));
     }
 
+    @Description("Страница информации о заявке")
+    @Story("Страница информации о заявке")
+    @Step("п163-165, 167-173, 177-179 При тапе по конкретной заявке на странице Заявки открывается страница информации о заявке")
     @Test
     public void cardClaimShouldHaveRequiredFields(){
         //открываем заявку без комментариев
@@ -67,6 +80,7 @@ public class ClaimPageTest extends BeforeTestLogin{
         pauseShort();
         onView(withIndex(withId(R.id.claim_list_card), 2)).perform(click());
         pauseShort();
+
         ClaimCard.claimThemeTitleFull.check(matches(isDisplayed()));
         ClaimCard.claimThemeTitleTextFull.check(matches(isDisplayed()));
         ClaimCard.claimExecutorTitleFull.check(matches(isDisplayed()));
@@ -96,8 +110,12 @@ public class ClaimPageTest extends BeforeTestLogin{
         ClaimCard.claimDateTitleFull.check(matches(withText("Плановая дата")));
         ClaimCard.claimAuthorTitle.check(matches(withText("Автор")));
         ClaimCard.claimCreateTitle.check(matches(withText("Создана")));
+        clickBack();
     }
 
+    @Description("При тапе по кнопке фильтра открывается попап меню Фильтрация")
+    @Story("Проверка страницы Заявки")
+    @Step("п153-156 При тапе по кнопке фильтра открывается попап меню Фильтрация")
     @Test
     public void shouldOpenPopupFilter(){
         ClaimPage.filterButton.perform(click());
@@ -124,5 +142,31 @@ public class ClaimPageTest extends BeforeTestLogin{
         ClaimPage.statusCancelled.check(matches(isClickable()));
         ClaimPage.filterOkButton.check(matches(isClickable()));
         ClaimPage.filterCancelButton.check(matches(isClickable()));
+        clickBack();
+    }
+
+    @Description("На странице Заявки отображается хедер")
+    @Story("Проверка страницы Заявки")
+    @Step("п138-140 На странице Заявки отображается хедер")
+    @Test
+    public void shouldHaveHeader(){
+        headerCheck();
+        ClaimCard.claimDateTitle.perform(customSwipeUp());
+        pauseShort();
+        headerCheck();
+    }
+
+    @Description("При тапе по кнопке + (добавить заявку) открывается страница Создание заявки")
+    @Story("Проверка страницы Заявки")
+    @Step("п152 При тапе по кнопке + (добавить заявку) открывается страница Создание заявки + \n" +
+            "п162 При нажатии на странице Создания заявки системную кнопку НАЗАД, открывается страница Заявки")
+    @Test
+    public void shouldOpenAddNewClaimPage(){
+        ClaimPage.addNewClaimButton.perform(click());
+        pauseShort();
+        AddNewClaimPage.titleHeader.check(matches(isDisplayed()));
+        clickBack();
+        pauseShort();
+        ClaimPage.titleClaimHeader.check(matches(isDisplayed()));
     }
 }

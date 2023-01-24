@@ -89,7 +89,7 @@ public class MainPageTest extends BeforeTestLogin {
         onView(withIndex(withId(R.id.news_item_description_text_view), 1)).check(matches(isDisplayed()));
     }
 
-    @Description("На Главной странице отображается ...")
+    @Description("При тапе по кнопке ВСЕ НОВОСТИ открывается страница новостей")
     @Story("Проверка Главной страницы")
     @Step("п32 При тапе по кнопке ВСЕ НОВОСТИ открывается страница новостей")
     @Test
@@ -102,7 +102,7 @@ public class MainPageTest extends BeforeTestLogin {
         MainPage.claimBlockHeader.check(matches(isDisplayed()));
     }
 
-    @Description("На Главной странице отображается ...")
+    @Description("При тапе по кнопке ВСЕ ЗАЯВКИ открывается страница Заявки")
     @Story("Проверка Главной страницы")
     @Step("п60 При тапе по кнопке ВСЕ ЗАЯВКИ открывается страница Заявки")
     @Test
@@ -115,7 +115,7 @@ public class MainPageTest extends BeforeTestLogin {
         MainPage.newsHeaderTitle.check(matches(isDisplayed()));
     }
 
-    @Description("На Главной странице отображается ...")
+    @Description("При прокрутке Главного экрана Хедер не прокручивается")
     @Story("Проверка Главной страницы")
     @Step("п28 При прокрутке Главного экрана Хедер не прокручивается")
     @Test
@@ -125,7 +125,7 @@ public class MainPageTest extends BeforeTestLogin {
         HeaderPage.logoView.check(matches(isDisplayed()));
     }
 
-    @Description("На Главной странице отображается ...")
+    @Description("При тапе по кнопке + (добавить заявку)...")
     @Story("Проверка Главной страницы")
     @Step("п66,67 При тапе по кнопке + (добавить заявку) открывается страница Создание заявки /n" +
             "При нажатии на странице Создания заявки системную кнопку НАЗАД, открывается Главная страница")
