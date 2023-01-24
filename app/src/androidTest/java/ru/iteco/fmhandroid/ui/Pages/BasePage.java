@@ -12,6 +12,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import android.content.Context;
 import android.os.IBinder;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 
@@ -56,6 +57,21 @@ public class BasePage {
             @Override
             public void perform(UiController uiController, final View view) {
                 uiController.loopMainThreadForAtLeast(millis);
+            }
+        };
+    }
+
+    public static Matcher<View> hasChildren(final Matcher<Integer> numChildrenMatcher) {
+        return new TypeSafeMatcher<View>() {
+            @Override
+            public boolean matchesSafely(View view) {
+                return view instanceof ViewGroup && numChildrenMatcher.matches(((ViewGroup)view).getChildCount());
+            }
+
+            @Override
+            public void describeTo(Description description) {
+                description.appendText(" a view with # children is ");
+                numChildrenMatcher.describeTo(description);
             }
         };
     }

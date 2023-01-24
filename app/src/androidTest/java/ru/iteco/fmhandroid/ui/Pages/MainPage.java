@@ -1,10 +1,14 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.Matchers.allOf;
 
 import android.view.View;
@@ -47,5 +51,25 @@ public class MainPage extends BasePage {
     public static ViewInteraction claimExpandButton = onView(withIndex(withId(R.id.news_item_material_card_view), 1));
     public static ViewInteraction claimShowAllButton = onView(withId(R.id.all_claims_text_view));
 
+    public static void countNewsIs(int i){
+//        onView(withId(R.id.news_item_material_card_view)).check(matches(allOf(
+//                isDisplayed(),
+//                hasChildren(is(i))
+//        )));
+        onView(withId(R.id.container_list_news_include_on_fragment_main)).check(matches(allOf(
+                isDisplayed(),
+                hasChildren(is(i))
+        )));
+    }
 
+    public static void newsContainerOneIsHidden() {
+        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(click());
+//        newsHeaderTitle.perform(click());
+        onView(withIndex(withId(R.id.news_item_material_card_view), 0)).check(matches(not(isDisplayed())));
+    }
+
+    public static void newsContainerClick() {
+        onView(withIndex(withId(R.id.expand_material_button), 0)).perform(click());
+//        newsHeaderTitle.perform(click());
+    }
 }
