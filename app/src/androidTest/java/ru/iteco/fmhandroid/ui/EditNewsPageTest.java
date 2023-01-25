@@ -18,6 +18,7 @@ import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
 public class EditNewsPageTest extends BeforeTestLogin{
@@ -94,14 +95,14 @@ public class EditNewsPageTest extends BeforeTestLogin{
         AddNewNewsPage.titleHeader.check(matches(isDisplayed()));
         clickBack();
         pauseShort();
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
+        NewsControlPage.controlPanelTitle.check(matches(isDisplayed()));
     }
 
     @Test
     public void shouldOpenNewsPageCNTRLPalnelWhenClickBackWOChanges(){
         clickBack();
         pauseShort();
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
+        NewsControlPage.controlPanelTitle.check(matches(isDisplayed()));
     }
 
     @Test
@@ -116,7 +117,7 @@ public class EditNewsPageTest extends BeforeTestLogin{
     public void shouldOpenNewsPageCntrlPanelWhenTapOKOnPopup(){
         AddNewNewsPage.cancelButton.perform(click());
         AddNewNewsPage.noSaveChangesOkButton.perform(click());
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
+        NewsControlPage.controlPanelTitle.check(matches(isDisplayed()));
     }
 
     @Test

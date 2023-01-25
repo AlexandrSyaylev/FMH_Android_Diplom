@@ -1,7 +1,10 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.supportsInputMethods;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -41,6 +44,15 @@ public class AddNewClaimPage extends BasePage{
     public static ViewInteraction timeOKButton = onView(withId(android.R.id.button1));
     public static ViewInteraction timeCancelButton = onView(withId(android.R.id.button2));
 
-    public static ViewInteraction EmptyFieldMessage = onView(withText("Заполните пустые поля"));
-    public static ViewInteraction EmptyFieldOkButton = onView(withId(android.R.id.button1));
+    public static ViewInteraction emptyFieldMessage = onView(withText("Заполните пустые поля"));
+    public static ViewInteraction emptyFieldOkButton = onView(withId(android.R.id.button1));
+
+
+    public static void emptyFieldMessageCheck(){
+        AddNewClaimPage.emptyFieldMessage.check(matches(isDisplayed()));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(isDisplayed()));
+        AddNewClaimPage.emptyFieldMessage.check(matches(withText("Заполните пустые поля")));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(withText("OK")));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(isClickable()));
+    }
 }

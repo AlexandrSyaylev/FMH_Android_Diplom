@@ -1,5 +1,6 @@
 package ru.iteco.fmhandroid.ui;
 
+import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -15,9 +16,12 @@ import org.junit.Test;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
+import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
 public class AddNewNewsPageTest extends BeforeTestLogin {
@@ -28,11 +32,12 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         pauseShort();
         NewsPage.controlPanelButton.perform(click());
         NewsPage.addNewNewsButton.perform(click());
+        pauseShort();
     }
 
-    @Description("Страница содержит поля ...")
+    @Description("Страница содержит заголовок \"Создание Новости\"")
     @Story("Проверка Страницы Создание Новости")
-    @Step("п220-223 Страница содержит поля ...")
+    @Step("п295,296,313 Страница содержит заголовок \"Создание Новости\"")
     @Test
     public void shouldHaveRequiredElements(){
         AddNewNewsPage.titleHeader.check(matches(isDisplayed()));
@@ -61,94 +66,65 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.titleHeader.check(matches(withText("Создание")));
         AddNewNewsPage.subTitleHeader.check(matches(withText("Новости")));
 
-
         AddNewNewsPage.categoryField.check(matches(withHint("Категория")));
         AddNewNewsPage.titleField.check(matches(withHint("Заголовок")));
         AddNewNewsPage.dateField.check(matches(withHint("Дата публикации")));
         AddNewNewsPage.timeField.check(matches(withHint("Время")));
         AddNewNewsPage.descriptionField.check(matches(withHint("Описание")));
+        AddNewNewsPage.switcherButton.check(matches(isChecked()));
+        clickBack();
     }
 
+    @Description("Раскрывающийся список Категория содержит перечень категорий")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п297 Раскрывающийся список Категория содержит перечень категорий")
     @Test
     public void shouldHaveAllCategoriesInDropMenu(){
         AddNewNewsPage.categoryField.perform(click());
         AddNewNewsPage.categoryField.perform(closeSoftKeyboard());
         pauseShort();
-
-        AddNewNewsPage.categoryDropDownA.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownB.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownC.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownD.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownE.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownF.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownG.check(matches(isDisplayed()));
-        AddNewNewsPage.categoryDropDownH.check(matches(isDisplayed()));
-    }
-
-    @Test
-    public void shouldShowMessageWhenClosePage(){
-        AddNewNewsPage.cancelButton.perform(click());
-        AddNewNewsPage.noSaveChangesMessage.check(matches(isDisplayed()));
-        AddNewNewsPage.noSaveChangesMessage.check(matches(withText("Изменения не будут сохранены. Вы действительно хотите выйти?")));
-        AddNewNewsPage.noSaveChangesCancelButton.check(matches(isDisplayed()));
-        AddNewNewsPage.noSaveChangesCancelButton.check(matches(withText("Отмена")));
-        AddNewNewsPage.noSaveChangesCancelButton.check(matches(isClickable()));
-
-        AddNewNewsPage.noSaveChangesOkButton.check(matches(isDisplayed()));
-        AddNewNewsPage.noSaveChangesOkButton.check(matches(withText("OK")));
-        AddNewNewsPage.noSaveChangesOkButton.check(matches(isClickable()));
-
-        AddNewNewsPage.noSaveChangesCancelButton.perform(click());
-        pauseShort();
-        AddNewNewsPage.titleHeader.check(matches(isDisplayed()));
+        AddNewNewsPage.categoryDropListCheck();
         clickBack();
         pauseShort();
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
+        clickBack();
     }
 
+    @Description("При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п301,316 При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
     @Test
-    public void shouldOpenNewsPageCNTRLPalnelWhenClickBackWOChanges(){
+    public void shouldShowErrorWithEmptyFields(){
+        AddNewNewsPage.saveButton.perform(click());
+        onView(withText(R.string.empty_fields)).inRoot(new BeforeTestLogin.ToastMatcher())
+                .check(matches(withText("Заполните пустые поля")));
+        pauseShort();
         clickBack();
         pauseShort();
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
     }
 
-    @Test
-    public void shouldClosePopupWhenTapCancel(){
-        AddNewNewsPage.cancelButton.perform(click());
-        AddNewNewsPage.noSaveChangesCancelButton.perform(click());
-        pauseShort();
-        AddNewNewsPage.titleHeader.check(matches(isDisplayed()));
-        clickBack();
-
-    }
-
-    @Test
-    public void shouldOpenNewsPageCntrlPanelWhenTapOKOnPopup(){
-        AddNewNewsPage.cancelButton.perform(click());
-        AddNewNewsPage.noSaveChangesOkButton.perform(click());
-        NewsPage.controlPanelTitle.check(matches(isDisplayed()));
-    }
-
+    @Description("При тапе по полю Дата открывается календарь на текущей дате")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п303 При тапе по полю Дата открывается календарь на текущей дате")
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
         AddNewNewsPage.dateField.perform(click());
         pauseShort();
-        AddNewNewsPage.calendarView.check(matches(isDisplayed()));
-        AddNewNewsPage.calendarCancelButton.check(matches(isDisplayed()));
-        AddNewNewsPage.calendarOkButton.check(matches(isDisplayed()));
-        AddNewNewsPage.calendarCancelButton.check(matches(isClickable()));
-        AddNewNewsPage.calendarOkButton.check(matches(isClickable()));
+        AddNewNewsPage.calendarBaseCheck();
+        clickBack();
+        pauseShort();
+        clickBack();
     }
 
+    @Description("При тапе по полю Время открываются часы")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п305 При тапе по полю Время открываются часы")
     @Test
     public void shouldOpenClockWhenTapTimeField(){
         AddNewNewsPage.timeField.perform(click());
         pauseShort();
-        AddNewNewsPage.timeHeader.check(matches(isDisplayed()));
-        AddNewNewsPage.timeCancelButton.check(matches(isDisplayed()));
-        AddNewNewsPage.timeOKButton.check(matches(isDisplayed()));
-        AddNewNewsPage.timeOKButton.check(matches(isClickable()));
-        AddNewNewsPage.timeCancelButton.check(matches(isClickable()));
+        AddNewNewsPage.clockBaseCheck();
+        clickBack();
+        pauseShort();
+        clickBack();
     }
 }

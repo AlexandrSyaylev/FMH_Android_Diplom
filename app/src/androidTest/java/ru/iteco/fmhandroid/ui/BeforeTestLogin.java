@@ -42,6 +42,7 @@ public class BeforeTestLogin extends BasePage {
     public void login() {
         pause();
         loginFieldAsTextField.perform(typeText("login2"));
+        pauseShort();
         passwordFieldAsTextField.perform(typeText("password2"));
         loginButton.perform(click());
         onView(isRoot()).perform(waitFor(2000));

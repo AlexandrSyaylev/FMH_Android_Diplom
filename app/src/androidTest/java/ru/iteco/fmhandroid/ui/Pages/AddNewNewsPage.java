@@ -1,7 +1,10 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDescendantOfA;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.supportsInputMethods;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
@@ -11,6 +14,7 @@ import static org.hamcrest.Matchers.allOf;
 import androidx.test.espresso.ViewInteraction;
 
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 
 public class AddNewNewsPage extends BasePage{
     public static ViewInteraction titleHeader = onView(withId(R.id.custom_app_bar_title_text_view));
@@ -49,4 +53,31 @@ public class AddNewNewsPage extends BasePage{
     public static ViewInteraction timeHeader = onView(withId(android.R.id.custom));
     public static ViewInteraction timeOKButton = onView(withId(android.R.id.button1));
     public static ViewInteraction timeCancelButton = onView(withId(android.R.id.button2));
+
+    public static void calendarBaseCheck(){
+        calendarView.check(matches(isDisplayed()));
+        calendarCancelButton.check(matches(isDisplayed()));
+        calendarOkButton.check(matches(isDisplayed()));
+        calendarCancelButton.check(matches(isClickable()));
+        calendarOkButton.check(matches(isClickable()));
+    }
+
+    public static void clockBaseCheck(){
+        timeHeader.check(matches(isDisplayed()));
+        timeCancelButton.check(matches(isDisplayed()));
+        timeOKButton.check(matches(isDisplayed()));
+        timeOKButton.check(matches(isClickable()));
+        timeCancelButton.check(matches(isClickable()));
+    }
+
+    public static void categoryDropListCheck(){
+        categoryDropDownA.check(matches(isDisplayed()));
+        categoryDropDownB.check(matches(isDisplayed()));
+        categoryDropDownC.check(matches(isDisplayed()));
+        categoryDropDownD.check(matches(isDisplayed()));
+        categoryDropDownE.check(matches(isDisplayed()));
+        categoryDropDownF.check(matches(isDisplayed()));
+        categoryDropDownG.check(matches(isDisplayed()));
+        categoryDropDownH.check(matches(isDisplayed()));
+    }
 }

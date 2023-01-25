@@ -11,8 +11,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
@@ -20,9 +18,7 @@ import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;
 
 public class AddNewClaimPageTest extends BeforeTestLogin {
@@ -106,20 +102,15 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         MainPage.claimBlockHeader.check(matches(isDisplayed()));
     }
 
-    @Description("Нельзя создать заявку с пустыми полями, кроме Исполнитель")
+    @Description("При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п228 Нельзя создать заявку с пустыми полями, кроме Исполнитель")
+    @Step("п301 При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
     @Test
     public void shouldShowErrorWithEmptyFields(){
         openNewClaimPage();
         AddNewClaimPage.saveButton.perform(click());
-        AddNewClaimPage.EmptyFieldMessage.check(matches(isDisplayed()));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(isDisplayed()));
-        AddNewClaimPage.EmptyFieldMessage.check(matches(withText("Заполните пустые поля")));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(withText("OK")));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(isClickable()));
-
-        AddNewClaimPage.EmptyFieldOkButton.perform(click());
+        AddNewClaimPage.emptyFieldMessageCheck();
+        AddNewClaimPage.emptyFieldOkButton.perform(click());
         pauseShort();
         clickBack();
         pauseShort();
@@ -133,11 +124,7 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         openNewClaimPage();
         AddNewClaimPage.dateField.perform(click());
         pauseShort();
-        AddNewClaimPage.calendarView.check(matches(isDisplayed()));
-        AddNewClaimPage.calendarCancelButton.check(matches(isDisplayed()));
-        AddNewClaimPage.calendarOkButton.check(matches(isDisplayed()));
-        AddNewClaimPage.calendarCancelButton.check(matches(isClickable()));
-        AddNewClaimPage.calendarOkButton.check(matches(isClickable()));
+        AddNewNewsPage.calendarBaseCheck();
         clickBack();
         clickBack();
     }
@@ -150,11 +137,7 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         openNewClaimPage();
         AddNewClaimPage.timeField.perform(click());
         pauseShort();
-        AddNewClaimPage.timeHeader.check(matches(isDisplayed()));
-        AddNewClaimPage.timeCancelButton.check(matches(isDisplayed()));
-        AddNewClaimPage.timeOKButton.check(matches(isDisplayed()));
-        AddNewClaimPage.timeOKButton.check(matches(isClickable()));
-        AddNewClaimPage.timeCancelButton.check(matches(isClickable()));
+        AddNewNewsPage.clockBaseCheck();
         clickBack();
         clickBack();
     }
@@ -179,13 +162,13 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.saveButton.perform(click());
         pauseShort();
 
-        AddNewClaimPage.EmptyFieldMessage.check(matches(isDisplayed()));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(isDisplayed()));
-        AddNewClaimPage.EmptyFieldMessage.check(matches(withText("Заполните пустые поля")));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(withText("OK")));
-        AddNewClaimPage.EmptyFieldOkButton.check(matches(isClickable()));
+        AddNewClaimPage.emptyFieldMessage.check(matches(isDisplayed()));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(isDisplayed()));
+        AddNewClaimPage.emptyFieldMessage.check(matches(withText("Заполните пустые поля")));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(withText("OK")));
+        AddNewClaimPage.emptyFieldOkButton.check(matches(isClickable()));
 
-        AddNewClaimPage.EmptyFieldOkButton.perform(click());
+        AddNewClaimPage.emptyFieldOkButton.perform(click());
         pauseShort();
         AddNewClaimPage.descriptionField.perform(closeSoftKeyboard());
         pauseShort();
