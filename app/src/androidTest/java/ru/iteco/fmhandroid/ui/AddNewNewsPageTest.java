@@ -12,6 +12,9 @@ import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import org.junit.Before;
 import org.junit.Test;
 
+import io.qameta.allure.kotlin.Description;
+import io.qameta.allure.kotlin.Step;
+import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
@@ -27,6 +30,9 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         NewsPage.addNewNewsButton.perform(click());
     }
 
+    @Description("Страница содержит поля ...")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п220-223 Страница содержит поля ...")
     @Test
     public void shouldHaveRequiredElements(){
         AddNewNewsPage.titleHeader.check(matches(isDisplayed()));

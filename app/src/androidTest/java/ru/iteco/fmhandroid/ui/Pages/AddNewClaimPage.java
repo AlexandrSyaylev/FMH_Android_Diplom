@@ -40,4 +40,7 @@ public class AddNewClaimPage extends BasePage{
     public static ViewInteraction timeHeader = onView(withId(android.R.id.custom));
     public static ViewInteraction timeOKButton = onView(withId(android.R.id.button1));
     public static ViewInteraction timeCancelButton = onView(withId(android.R.id.button2));
+
+    public static ViewInteraction EmptyFieldMessage = onView(withText("Заполните пустые поля"));
+    public static ViewInteraction EmptyFieldOkButton = onView(withId(android.R.id.button1));
 }
