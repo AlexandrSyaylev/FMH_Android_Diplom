@@ -30,25 +30,25 @@ public class NewsPage extends BasePage {
     public static ViewInteraction filterCancelButton = onView(withId(R.id.cancel_button));
 
     public static void filterBaseCheck(){
-        NewsPage.filterTitle.check(matches(isDisplayed()));
-        NewsPage.filterTitle.check(matches(withText("Фильтровать новости")));
-        NewsPage.filterCategory.check(matches(isDisplayed()));
-        NewsPage.filterCategoryEnd.check(matches(isDisplayed()));
-        NewsPage.filterDateStart.check(matches(isDisplayed()));
-        NewsPage.filterDateEnd.check(matches(isDisplayed()));
-        NewsPage.filterSubmitButton.check(matches(isDisplayed()));
-        NewsPage.filterCancelButton.check(matches(isDisplayed()));
+        filterTitle.check(matches(isDisplayed()));
+        filterTitle.check(matches(withText("Фильтровать новости")));
+        filterCategory.check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.text_input_end_icon), 0)).check(matches(isDisplayed()));
+        filterDateStart.check(matches(isDisplayed()));
+        filterDateEnd.check(matches(isDisplayed()));
+        filterSubmitButton.check(matches(isDisplayed()));
+        filterCancelButton.check(matches(isDisplayed()));
 
-        NewsPage.filterCategory.check(matches(isClickable()));
-        NewsPage.filterDateStart.check(matches(isClickable()));
-        NewsPage.filterDateEnd.check(matches(isClickable()));
-        NewsPage.filterSubmitButton.check(matches(isClickable()));
-        NewsPage.filterCancelButton.check(matches(isClickable()));
+        filterCategory.check(matches(isClickable()));
+        filterDateStart.check(matches(isClickable()));
+        filterDateEnd.check(matches(isClickable()));
+        filterSubmitButton.check(matches(isClickable()));
+        filterCancelButton.check(matches(isClickable()));
 
-        NewsPage.filterCategory.check(matches(withHint("Категория")));
-        NewsPage.filterDateStart.check(matches(withHint("ДД.ММ.ГГГГ")));
-        NewsPage.filterDateEnd.check(matches(withHint("ДД.ММ.ГГГГ")));
-        NewsPage.filterSubmitButton.check(matches(withText("Фильтровать")));
-        NewsPage.filterCancelButton.check(matches(withText("Отмена")));
+        filterCategory.check(matches(withHint("Категория")));
+        filterDateStart.check(matches(withHint("ДД.ММ.ГГГГ")));
+        filterDateEnd.check(matches(withHint("ДД.ММ.ГГГГ")));
+        filterSubmitButton.check(matches(withText("Фильтровать")));
+        filterCancelButton.check(matches(withText("Отмена")));
     }
 }
