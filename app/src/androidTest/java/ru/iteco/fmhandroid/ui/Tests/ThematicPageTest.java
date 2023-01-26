@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -16,6 +16,7 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AboutPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
@@ -24,7 +25,7 @@ import ru.iteco.fmhandroid.ui.Pages.MainPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 import ru.iteco.fmhandroid.ui.Pages.ThematicPage;
 
-public class ThematicPageTest extends BeforeTestLogin{
+public class ThematicPageTest extends BeforeTestLogin {
     @Before
     public void openPage(){
         HeaderPage.thematicButton.perform(click());

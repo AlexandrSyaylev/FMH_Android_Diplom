@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AboutPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;

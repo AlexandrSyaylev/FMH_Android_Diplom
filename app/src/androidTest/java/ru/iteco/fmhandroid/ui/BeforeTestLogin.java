@@ -27,31 +27,44 @@ import org.junit.Rule;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
+import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 
 @RunWith(AllureAndroidJUnit4.class)
-//@RunWith(AndroidJUnit4.class)
 public class BeforeTestLogin extends BasePage {
-    @Rule
-    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
-            new ActivityScenarioRule<>(AppActivity.class);
-
     @Before
     public void login() {
         pause();
-        loginFieldAsTextField.perform(typeText("login2"));
-        pauseShort();
-        passwordFieldAsTextField.perform(typeText("password2"));
-        loginButton.perform(click());
-        onView(isRoot()).perform(waitFor(2000));
+        try{
+            loginFieldAsTextField.perform(typeText("login2"));
+            pauseSSt();
+            passwordFieldAsTextField.perform(typeText("password2"));
+            pauseSSt();
+            loginButton.perform(click());
+            pauseShort();
+
+        }catch (androidx.test.espresso.PerformException e){
+            System.out.println("Already login");
+        }catch (androidx.test.espresso.NoMatchingViewException e){
+            System.out.println("Already login");
+        }
     }
 
     @After
     public void logout() {
-        lkButton.perform(click());
-        logoutButton.perform(click());
+        try {
+            pauseSSt();
+            lkButton.perform(click());
+            pauseSSt();
+            logoutButton.perform(click());
+        }catch (androidx.test.espresso.PerformException e){
+            System.out.println("Huston? We have a problem: ");
+        }catch (androidx.test.espresso.NoMatchingViewException e){
+            System.out.println("Gimme more pause to load :)");
+        }
+
     }
 
     public static void headerCheck(){

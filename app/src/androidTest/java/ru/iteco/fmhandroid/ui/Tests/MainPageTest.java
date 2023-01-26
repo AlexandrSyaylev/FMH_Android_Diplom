@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -10,20 +10,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsCard;
 

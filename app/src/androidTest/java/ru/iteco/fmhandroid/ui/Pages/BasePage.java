@@ -1,31 +1,26 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 
-import static android.content.Context.*;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.pressBack;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 
-import android.content.Context;
 import android.os.IBinder;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 
 import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.Root;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
-import androidx.test.espresso.ViewAssertion;
-import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.GeneralSwipeAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Swipe;
+import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.uiautomator.UiDevice;
 
 import com.google.android.material.textfield.TextInputLayout;
@@ -33,10 +28,20 @@ import com.google.android.material.textfield.TextInputLayout;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Rule;
 
 import java.io.IOException;
 
+import io.qameta.allure.android.rules.ScreenshotRule;
+import lombok.val;
+import ru.iteco.fmhandroid.ui.AppActivity;
+
 public class BasePage {
+    @Rule
+    public ScreenshotRule logcatRule = new ScreenshotRule(ScreenshotRule.Mode.FAILURE, "failure");
+    @Rule
+    public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
+            new ActivityScenarioRule<>(AppActivity.class);
 
     public static Matcher<Root> isPopupWindow() {
         return isPlatformPopup();
@@ -151,6 +156,7 @@ public class BasePage {
         onView(isRoot()).perform(pressBack());
         pauseShort();
     }
-    public static void pause() {onView(isRoot()).perform(waitFor(9000));}
-    public static void pauseShort() {onView(isRoot()).perform(waitFor(1500));}
+    public static void pause() {onView(isRoot()).perform(waitFor(5500));}
+    public static void pauseShort() {onView(isRoot()).perform(waitFor(1000));}
+    public static void pauseSSt() {onView(isRoot()).perform(waitFor(750));}
 }

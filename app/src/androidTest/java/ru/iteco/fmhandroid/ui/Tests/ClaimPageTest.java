@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -8,7 +8,6 @@ import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +15,14 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimCard;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 
-public class ClaimPageTest extends BeforeTestLogin{
+public class ClaimPageTest extends BeforeTestLogin {
     @Before
     public void openClaimPage() {
         HeaderPage.mainMenuButton.perform(click());
@@ -151,8 +151,10 @@ public class ClaimPageTest extends BeforeTestLogin{
     @Test
     public void shouldHaveHeader(){
         headerCheck();
-        ClaimCard.claimDateTitle.perform(customSwipeUp());
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
         pauseShort();
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
         headerCheck();
     }
 

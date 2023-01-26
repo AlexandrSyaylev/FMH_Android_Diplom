@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -11,12 +11,18 @@ import static androidx.test.espresso.matcher.ViewMatchers.withHint;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
+import static io.qameta.allure.android.AllureScreenshotKt.allureScreenshot;
+
+import org.junit.Rule;
 import org.junit.Test;
 
+import io.qameta.allure.android.rules.ScreenshotRule;
+import io.qameta.allure.kotlin.Attachment;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;

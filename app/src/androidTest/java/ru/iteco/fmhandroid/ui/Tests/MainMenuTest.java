@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 
 import static androidx.test.espresso.action.ViewActions.click;
@@ -14,6 +14,7 @@ import org.junit.Test;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AboutPage;
 import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
@@ -21,7 +22,7 @@ import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
-public class MainMenuTest extends BeforeTestLogin{
+public class MainMenuTest extends BeforeTestLogin {
 
     @Description("Проверка раскрывающегося меню (навигации)")
     @Story("Проверка Раскрывающегося Меню")

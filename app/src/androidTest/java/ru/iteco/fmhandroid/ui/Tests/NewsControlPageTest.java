@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -19,15 +19,14 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsCard;
 import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
-public class NewsControlPageTest extends BeforeTestLogin{
+public class NewsControlPageTest extends BeforeTestLogin {
     @Before
     public void openControlPage(){
         HeaderPage.mainMenuButton.perform(click());
@@ -68,7 +67,7 @@ public class NewsControlPageTest extends BeforeTestLogin{
         onView(withIndex(withId(R.id.news_item_author_text_view), 0)).check(matches(withText("Автор")));
 
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).perform(click());
-        NewsCard.newsDescription.check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.news_item_description_text_view), 0)).check(matches(isDisplayed()));
         pauseShort();
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).perform(click());
     }

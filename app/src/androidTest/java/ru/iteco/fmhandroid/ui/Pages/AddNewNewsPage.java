@@ -14,7 +14,6 @@ import static org.hamcrest.Matchers.allOf;
 import androidx.test.espresso.ViewInteraction;
 
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 
 public class AddNewNewsPage extends BasePage{
     public static ViewInteraction titleHeader = onView(withId(R.id.custom_app_bar_title_text_view));

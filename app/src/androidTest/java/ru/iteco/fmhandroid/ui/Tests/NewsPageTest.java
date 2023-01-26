@@ -1,10 +1,9 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
@@ -19,14 +18,14 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
-public class NewsPageTest extends BeforeTestLogin{
+public class NewsPageTest extends BeforeTestLogin {
     @Before
     @Step("Открыть страницу новости")
     public void openNewsPage() {
@@ -83,8 +82,10 @@ public class NewsPageTest extends BeforeTestLogin{
     @Test
     public void shouldSwitchToControlPanelAndBack(){
         NewsPage.controlPanelButton.perform(click());
+        pauseShort();
         NewsControlPage.controlPanelTitle.check(matches(isDisplayed()));
         clickBack();
+        pauseShort();
         NewsPage.titleNewsHeader.check(matches(isDisplayed()));
     }
 
@@ -111,6 +112,7 @@ public class NewsPageTest extends BeforeTestLogin{
         pauseShort();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
+        pauseSSt();
         clickBack();
     }
 

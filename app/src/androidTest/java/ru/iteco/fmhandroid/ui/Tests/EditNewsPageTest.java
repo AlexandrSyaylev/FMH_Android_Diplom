@@ -1,11 +1,10 @@
-package ru.iteco.fmhandroid.ui;
+package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isChecked;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
@@ -13,19 +12,21 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 
+import io.qameta.allure.kotlin.Attachment;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
 import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.Pages.NewsPage;
 
-public class EditNewsPageTest extends BeforeTestLogin{
+public class EditNewsPageTest extends BeforeTestLogin {
     @Before
     public void openNewNewsPage() {
         HeaderPage.mainMenuButton.perform(click());
@@ -74,15 +75,19 @@ public class EditNewsPageTest extends BeforeTestLogin{
     @Test
     public void shouldHaveAllCategoriesInDropMenu(){
         AddNewNewsPage.categoryField.perform(click());
+        pauseSSt();
         AddNewNewsPage.categoryField.perform(clearText());
+        pauseSSt();
         AddNewNewsPage.categoryField.perform(click());
+        pauseSSt();
         AddNewNewsPage.categoryField.perform(closeSoftKeyboard());
         pauseShort();
-
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
         pauseShort();
-        clickBack();
+        AddNewNewsPage.cancelButton.perform(click());
+        pauseSSt();
+        AddNewNewsPage.noSaveChangesOkButton.perform(click());
     }
 
     @Description("При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
