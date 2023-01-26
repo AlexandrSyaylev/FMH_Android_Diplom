@@ -102,6 +102,16 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         pauseShort();
     }
 
+    @Description("Страница содержит заголовок \"Создание Новости\"")
+    @Story("Проверка Страницы Создание Новости")
+    @Step("п295 Страница содержит заголовок \"Создание Новости\"")
+    @Test
+    public void shouldOpenNewsPageCntrlPanelWhenTapOKOnPopup(){
+        AddNewNewsPage.cancelButton.perform(click());
+        AddNewNewsPage.noSaveChangesOkButton.perform(click());
+        NewsControlPage.controlPanelTitle.check(matches(isDisplayed()));
+    }
+
     @Description("При тапе по полю Дата открывается календарь на текущей дате")
     @Story("Проверка Страницы Создание Новости")
     @Step("п303 При тапе по полю Дата открывается календарь на текущей дате")
