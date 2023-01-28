@@ -1,20 +1,10 @@
 package ru.iteco.fmhandroid.ui.Tests;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.clearText;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-import static ru.iteco.fmhandroid.ui.Pages.HeaderPage.lkButton;
-import static ru.iteco.fmhandroid.ui.Pages.LkMenuPage.logoutButton;
-import static ru.iteco.fmhandroid.ui.Pages.LoginPage.loginButton;
-import static ru.iteco.fmhandroid.ui.Pages.LoginPage.loginFieldAsTextField;
-import static ru.iteco.fmhandroid.ui.Pages.LoginPage.passwordFieldAsTextField;
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 
@@ -26,13 +16,14 @@ import org.junit.runners.MethodSorters;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
-import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.BasePage;
 import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
 import ru.iteco.fmhandroid.ui.Pages.LoginPage;
 import ru.iteco.fmhandroid.ui.Pages.SplashScreenPage;
 
@@ -45,49 +36,41 @@ public class LoginPageTest extends BasePage {
 
     public void login() {
         pause();
-        loginFieldAsTextField.perform(typeText("login2"));
-        passwordFieldAsTextField.perform(typeText("password2"));
-        loginButton.perform(click());
-        onView(isRoot()).perform(waitFor(2000));
+        LoginPage.loginFieldAsTextFieldType("login2");
+        LoginPage.passwordFieldAsTextFieldType("password2");
+        LoginPage.loginButtonClick();
+        pauseShort();
     }
 
     public void logout() {
-        lkButton.perform(click());
-        logoutButton.perform(click());
+        HeaderPage.lkButtonClick();
+        LkMenuPage.logoutButtonClick();
     }
 
     @Description("На странице Авторизации представлены необходимые элементы")
     @Story("Проверка Стартовой Страницы")
+    @DisplayName("На странице Авторизации представлены необходимые элементы")
     @Test
     public void A_loginPageUITest() {
         pause();
-        LoginPage.titleTextElement.check(matches(isDisplayed()));
-        LoginPage.titleTextElement.check(matches(withText("Авторизация")));
-
-        LoginPage.loginField.check(matches(isDisplayed()));
-        LoginPage.passwordField.check(matches(isDisplayed()));
-        LoginPage.loginButton.check(matches(isDisplayed()));
-
-        LoginPage.loginField.check(matches(hasTextInputLayout("Логин")));
-        LoginPage.passwordField.check(matches(hasTextInputLayout("Пароль")));
-        LoginPage.loginButton.check(matches((withText("Войти"))));
+        LoginPage.fieldsCheck();
     }
 
     @Description("На странице Авторизации представлены необходимые элементы")
     @Story("Проверка страницы Авторизации")
-    @Step("п7,8,9,10 Убедиться, что при пустых полях при тапе по кнопке Войти действий не происходит \n" +
+    @DisplayName("п7,8,9,10 Убедиться, что при пустых полях при тапе по кнопке Войти действий не происходит \n" +
             "- Убедится, что при нажатии на кнопку назад (скрыть клавиатуру) клавиатура скрывается, \n" +
             "при повторном тапе по полю, клавиатура появляется")
     @Test
     public void B_shouldShowErrorWithEmptyFields() {
         pause();
-        LoginPage.loginButton.perform(click());
+        LoginPage.loginButtonClick();
         onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
                 .check(matches(withText("Логин и пароль не могут быть пустыми")));
-        LoginPage.loginFieldAsTextField.perform(click());
+        LoginPage.loginFieldAsTextFieldClick();
         assertTrue(isKeyboardOpenedShellCheck());
         pauseShort();
-        LoginPage.passwordFieldAsTextField.perform(click());
+        LoginPage.passwordFieldAsTextFieldClick();
         assertTrue(isKeyboardOpenedShellCheck());
         clickBack();
         pauseShort();
@@ -96,88 +79,86 @@ public class LoginPageTest extends BasePage {
 
     @Description("При пустом поле появляется сообщение об ошибке")
     @Story("Проверка страницы Авторизации")
+    @DisplayName("При пустом поле появляется сообщение об ошибке")
     @Test
     public void C_shouldShowErrorWithOneEmptyField() {
         pause();
-        LoginPage.loginFieldAsTextField.perform(typeText("login"));
-        LoginPage.loginButton.perform(click());
+        LoginPage.loginFieldAsTextFieldType("login");
+        LoginPage.loginButtonClick();
         onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
                 .check(matches(withText("Логин и пароль не могут быть пустыми")));
 
-        LoginPage.loginFieldAsTextField.perform(clearText());
-        LoginPage.passwordFieldAsTextField.perform(typeText("password"));
-        LoginPage.loginButton.perform(click());
+        LoginPage.loginFieldAsTextFieldClear();
+        LoginPage.passwordFieldAsTextFieldType("password");
+        LoginPage.loginButtonClick();
         onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
                 .check(matches(withText("Логин и пароль не могут быть пустыми")));
-        LoginPage.passwordFieldAsTextField.perform(clearText());
+        LoginPage.passwordFieldAsTextFieldClear();
     }
 
     @Description("При вводе произвольных логин пароль не входит в приложение")
     @Story("Проверка страницы Авторизации")
-    @Step("п11,12 При вводе неверных пар логин- пароль появляется поп-ап с текстом \"Неверный логин или пароль\"")
+    @DisplayName("п11,12 При вводе неверных пар логин- пароль появляется поп-ап с текстом \"Неверный логин или пароль\"")
     @Test
     public void D_shouldShowErrorWithWrongValues() {
         pause();
-        LoginPage.loginFieldAsTextField.perform(typeText("login"));
-        LoginPage.passwordFieldAsTextField.perform(typeText("password"));
-        LoginPage.loginButton.perform(click());
+        LoginPage.loginFieldAsTextFieldType("login");
+        LoginPage.passwordFieldAsTextFieldType("password");
+        LoginPage.loginButtonClick();
         onView(withText(R.string.wrong_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
                 .check(matches(withText("Неверный логин или пароль")));
     }
 
     @Description("При вводе валидных логин пароль входит в приложение")
     @Story("Проверка страницы Авторизации")
-    @Step("п13,14,17 Ввод валидных логин пароль, нажать на Войти")
+    @DisplayName("п13,14,17 Ввод валидных логин пароль, нажать на Войти")
     @Test
     public void E_shouldLogin(){
         pause();
-        LoginPage.titleTextElement.check(matches(isDisplayed()));
-        LoginPage.loginFieldAsTextField.perform(typeText("login2"));
-        LoginPage.passwordFieldAsTextField.perform(typeText("password2"));
-        LoginPage.loginButton.perform(click());
+        LoginPage.titleTextElementCheck();
+        LoginPage.loginFieldAsTextFieldType("login2");
+        LoginPage.passwordFieldAsTextFieldType("password2");
+        LoginPage.loginButtonClick();
         pauseShort();
-        HeaderPage.logoView.check(matches(isDisplayed()));
+        HeaderPage.logoCheck();
     }
 
     @Description("После авторизации пользователя при перезапуске отображается страница загрузки")
     @Story("Проверка Главной страницы")
-    @Step("п19 При повторном запуске приложения после авторизации пользователя отображается экран загрузки с прогресс баром и текстом высказывания")
+    @DisplayName("п19 При повторном запуске приложения после авторизации пользователя отображается экран загрузки с прогресс баром и текстом высказывания")
     @Test
     public void F_shouldAppStartOnSplashScreenPageWhenUserLogin(){
-        SplashScreenPage.imageId.check(matches(isDisplayed()));
-        SplashScreenPage.progressBarId.check(matches(isDisplayed()));
-        SplashScreenPage.textViewId.check(matches(isDisplayed()));
+        SplashScreenPage.screenSplashCheK();
         pause();
     }
 
     @Description("После авторизации пользователя при перезапуске открывается Главная страница")
     @Story("Проверка Главной страницы")
-    @Step("п18 Открывается главная страница")
+    @DisplayName("п18 Открывается главная страница")
     @Test
     public void G_shouldAppStartOnAutorizationPageWhenUserLogOut(){
         pause();
-        HeaderPage.logoView.check(matches(isDisplayed()));
+        HeaderPage.logoCheck();
         logout();
     }
 
     @Description("После выхода пользователя при перезапуске открывается страница Авторизации")
     @Story("Проверка Главной страницы")
-    @Step("п21 Если авторизованным пользователем нажать выход, при повторном запуске отображается страница Авторизации")
+    @DisplayName("п21 Если авторизованным пользователем нажать выход, при повторном запуске отображается страница Авторизации")
     @Test
     public void H_shouldAppStartOnAutorizationPageWhenUserLogOut(){
         pause();
-        LoginPage.titleTextElement.check(matches(isDisplayed()));
-        LoginPage.titleTextElement.check(matches(withText("Авторизация")));
+        LoginPage.titleTextElementCheck();
         login();
     }
 
     @Description("запуск авторизованным пользователем при перезапуске приложенияч авторизванным пользователем")
     @Story("Проверка Главной страницы")
-    @Step("п20 При повторном запуске приложения после авторизации пользователя приложение запускается под авторизованным пользователем")
+    @DisplayName("п20 При повторном запуске приложения после авторизации пользователя приложение запускается под авторизованным пользователем")
     @Test
     public void I_shouldStartAppOnMainPageWhenAutorized(){
         pause();
-        HeaderPage.mainMenuButton.check(matches(isDisplayed()));
+        HeaderPage.mainMenuButtonCheck();
         logout();
     }
 }

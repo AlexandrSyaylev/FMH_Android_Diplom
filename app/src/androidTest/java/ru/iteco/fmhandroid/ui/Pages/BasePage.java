@@ -3,9 +3,15 @@ package ru.iteco.fmhandroid.ui.Pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.pressBack;
+import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.RootMatchers.isPlatformPopup;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
+import static androidx.test.espresso.matcher.ViewMatchers.withHint;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
+import static org.hamcrest.CoreMatchers.not;
 
 import android.os.IBinder;
 import android.view.View;
@@ -16,6 +22,7 @@ import androidx.test.InstrumentationRegistry;
 import androidx.test.espresso.Root;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
+import androidx.test.espresso.ViewInteraction;
 import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.GeneralSwipeAction;
 import androidx.test.espresso.action.Press;
@@ -33,7 +40,6 @@ import org.junit.Rule;
 import java.io.IOException;
 
 import io.qameta.allure.android.rules.ScreenshotRule;
-import lombok.val;
 import ru.iteco.fmhandroid.ui.AppActivity;
 
 public class BasePage {
@@ -42,6 +48,54 @@ public class BasePage {
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
+
+    public static void exist(ViewInteraction item){
+        item.check(matches(isDisplayed()));
+    }
+
+    public static void typeT(ViewInteraction item, String text){
+        item.perform(typeText(text));
+    }
+
+    public static void existClickable(ViewInteraction item){
+        item.check(matches(isDisplayed()));
+        item.check(matches(isClickable()));
+    }
+
+    public static void existNotClickable(ViewInteraction item){
+        item.check(matches(isDisplayed()));
+        item.check(matches(not(isClickable())));
+    }
+
+    public static void existText(ViewInteraction item, String text){
+        item.check(matches(isDisplayed()));
+        item.check(matches(withText(text)));
+    }
+    public static void existClickableHint(ViewInteraction item, String text){
+        item.check(matches(isDisplayed()));
+        item.check(matches(isClickable()));
+        item.check(matches(withHint(text)));
+    }
+
+    public static void existClickableText(ViewInteraction item, String text){
+        item.check(matches(isDisplayed()));
+        item.check(matches(isClickable()));
+        item.check(matches(withText(text)));
+    }
+
+    public static void existNotClickableText(ViewInteraction item, String text){
+        item.check(matches(isDisplayed()));
+        item.check(matches(not(isClickable())));
+        item.check(matches(withText(text)));
+    }
+
+    public static void clickBack() {
+        onView(isRoot()).perform(pressBack());
+        pauseShort();
+    }
+    public static void pause() {onView(isRoot()).perform(waitFor(5500));}
+    public static void pauseShort() {onView(isRoot()).perform(waitFor(1000));}
+    public static void pauseSSt() {onView(isRoot()).perform(waitFor(750));}
 
     public static Matcher<Root> isPopupWindow() {
         return isPlatformPopup();
@@ -151,12 +205,4 @@ public class BasePage {
             throw new RuntimeException("Keyboard check failed",e);
         }
     }
-
-    public static void clickBack() {
-        onView(isRoot()).perform(pressBack());
-        pauseShort();
-    }
-    public static void pause() {onView(isRoot()).perform(waitFor(5500));}
-    public static void pauseShort() {onView(isRoot()).perform(waitFor(1000));}
-    public static void pauseSSt() {onView(isRoot()).perform(waitFor(750));}
 }

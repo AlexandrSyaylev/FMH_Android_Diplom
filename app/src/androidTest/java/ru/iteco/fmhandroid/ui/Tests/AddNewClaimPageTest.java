@@ -1,122 +1,67 @@
 package ru.iteco.fmhandroid.ui.Tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.typeText;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withHint;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
-import static io.qameta.allure.android.AllureScreenshotKt.allureScreenshot;
-
-import org.junit.Rule;
+import org.junit.Before;
 import org.junit.Test;
 
-import io.qameta.allure.android.rules.ScreenshotRule;
-import io.qameta.allure.kotlin.Attachment;
 import io.qameta.allure.kotlin.Description;
-import io.qameta.allure.kotlin.Step;
 import io.qameta.allure.kotlin.Story;
-import ru.iteco.fmhandroid.R;
+import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.Pages.MainPage;
 
 public class AddNewClaimPageTest extends BeforeTestLogin {
-    @Step("п219 При тапе по кнопке Добавить Заявку (+) на странице Заяки открывается страница Создание заявки ")
+    @Before
+    @DisplayName("п219 При тапе по кнопке Добавить Заявку (+) на странице Заяки открывается страница Создание заявки ")
     public void openNewClaimPage() {
-        MainPage.claimAddNewButton.perform(click());
+        MainPage.claimAddNewButtonClick();
         pauseShort();
     }
 
     @Description("Страница содержит поля ...")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п220-223,229 Страница содержит поля ...")
+    @DisplayName("п220-223,229 Страница содержит поля ...")
     @Test
     public void shouldHaveRequiredElements(){
-        openNewClaimPage();
-        AddNewClaimPage.titleHeader.check(matches(isDisplayed()));
-        AddNewClaimPage.subTitleHeader.check(matches(isDisplayed()));
-        AddNewClaimPage.titleField.check(matches(isDisplayed()));
-        AddNewClaimPage.textCounter.check(matches(isDisplayed()));
-        AddNewClaimPage.executorField.check(matches(isDisplayed()));
-        onView(withIndex(withId(R.id.text_input_end_icon), 1)).check(matches(isDisplayed()));
-        AddNewClaimPage.dateField.check(matches(isDisplayed()));
-        AddNewClaimPage.timeField.check(matches(isDisplayed()));
-        AddNewClaimPage.descriptionField.check(matches(isDisplayed()));
-        AddNewClaimPage.saveButton.check(matches(isDisplayed()));
-        AddNewClaimPage.cancelButton.check(matches(isDisplayed()));
-
-        AddNewClaimPage.saveButton.check(matches(isClickable()));
-        AddNewClaimPage.cancelButton.check(matches(isClickable()));
-
-        AddNewClaimPage.saveButton.check(matches(withText("Сохранить")));
-        AddNewClaimPage.cancelButton.check(matches(withText("Отмена")));
-
-        AddNewClaimPage.titleHeader.check(matches(withText("Создание")));
-        AddNewClaimPage.subTitleHeader.check(matches(withText("Заявки")));
-
-        AddNewClaimPage.titleField.check(matches(withHint("Тема")));
-        AddNewClaimPage.executorField.check(matches(withHint("Исполнитель")));
-        AddNewClaimPage.dateField.check(matches(withHint("Дата")));
-        AddNewClaimPage.timeField.check(matches(withHint("Время")));
-        AddNewClaimPage.descriptionField.check(matches(withHint("Описание")));
+        AddNewClaimPage.elementsCheckAll();
         clickBack();
     }
 
     @Description("Появляется модальное окно с иформацией о несохраненных действиях и кнопками \"Отмена\" и \"ОК\"")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п225, 226 Появляется модальное окно с иформацией о несохраненных действиях и кнопками \n" +
+    @DisplayName("п225, 226 Появляется модальное окно с иформацией о несохраненных действиях и кнопками \n" +
             " \"Отмена\" и \"ОК\" при тапе \"Отмена\" при наличии изменений")
     @Test
     public void shouldShowPopupWhenTapCancelButton(){
-        openNewClaimPage();
-        AddNewClaimPage.titleField.perform(click());
-        AddNewClaimPage.titleField.perform(closeSoftKeyboard());
+        AddNewClaimPage.titleFieldClickAndHide();
         pauseShort();
-        AddNewClaimPage.cancelButton.perform(click());
-        AddNewClaimPage.noSaveChangesMessage.check(matches(isDisplayed()));
-        AddNewClaimPage.noSaveChangesMessage.check(matches(withText("Изменения не будут сохранены. Вы действительно хотите выйти?")));
-        AddNewClaimPage.noSaveChangesCancelButton.check(matches(isDisplayed()));
-        AddNewClaimPage.noSaveChangesCancelButton.check(matches(withText("Отмена")));
-        AddNewClaimPage.noSaveChangesCancelButton.check(matches(isClickable()));
+        AddNewClaimPage.cancelButtonClick();
+        AddNewClaimPage.noChangesMessageCheck();
 
-        AddNewClaimPage.noSaveChangesOkButton.check(matches(isDisplayed()));
-        AddNewClaimPage.noSaveChangesOkButton.check(matches(withText("OK")));
-        AddNewClaimPage.noSaveChangesOkButton.check(matches(isClickable()));
-
-        AddNewClaimPage.noSaveChangesCancelButton.perform(click());
-        pauseShort();
-        AddNewClaimPage.titleHeader.check(matches(isDisplayed()));
+        AddNewClaimPage.noSaveChangesCancelButtonClick();
+        AddNewClaimPage.titleHeaderCheck();
         clickBack();
     }
 
     @Description("При тапе по кнопке \"Отмена\" на странице создания заявки модальное окно закрывается")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п227 При тапе по кнопке \"Отмена\" на странице создания заявки модальное окно закрывается, пользоавтель остается на странице Создания заявки")
+    @DisplayName("п227 При тапе по кнопке \"Отмена\" на странице создания заявки модальное окно закрывается, пользоавтель остается на странице Создания заявки")
     @Test
     public void shouldOpenMainPageIfTapOkButtonOnPopup(){
-        openNewClaimPage();
-        AddNewClaimPage.cancelButton.perform(click());
-        AddNewClaimPage.noSaveChangesOkButton.perform(click());
-        pauseShort();
-        MainPage.claimBlockHeader.check(matches(isDisplayed()));
+        AddNewClaimPage.cancelButtonClick();
+        AddNewClaimPage.noSaveChangesOkButtonClick();
+        MainPage.claimBlockHeaderCheck();
     }
 
     @Description("При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п301 При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
+    @DisplayName("п301 При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
     @Test
     public void shouldShowErrorWithEmptyFields(){
-        openNewClaimPage();
-        AddNewClaimPage.saveButton.perform(click());
+        AddNewClaimPage.saveButtonClick();
         AddNewClaimPage.emptyFieldMessageCheck();
-        AddNewClaimPage.emptyFieldOkButton.perform(click());
+        AddNewClaimPage.emptyFieldOkButtonClick();
         pauseShort();
         clickBack();
         pauseShort();
@@ -124,12 +69,10 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
 
     @Description("При тапе по полю Дата открывается календарь")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п233 При тапе по полю Дата открывается календарь")
+    @DisplayName("п233 При тапе по полю Дата открывается календарь")
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
-        openNewClaimPage();
-        AddNewClaimPage.dateField.perform(click());
-        pauseShort();
+        AddNewClaimPage.dateFieldClick();
         AddNewNewsPage.calendarBaseCheck();
         clickBack();
         clickBack();
@@ -137,12 +80,10 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
 
     @Description("При тапе по полю Время открывается интерактивное окно с часами")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п235 При тапе по полю Время открывается интерактивное окно с часами")
+    @DisplayName("п235 При тапе по полю Время открывается интерактивное окно с часами")
     @Test
     public void shouldOpenClockWhenTapTimeField(){
-        openNewClaimPage();
-        AddNewClaimPage.timeField.perform(click());
-        pauseShort();
+        AddNewClaimPage.timeFieldClick();
         AddNewNewsPage.clockBaseCheck();
         clickBack();
         clickBack();
@@ -150,34 +91,23 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
 
     @Description("Нельзя создать завку с пустым полем Комментарий, или комментарием из произвольного количества пробелов")
     @Story("Проверка Страницы Создание заявки")
-    @Step("п241 Нельзя создать завку с пустым полем Комментарий, или комментарием из произвольного количества пробелов")
+    @DisplayName("п241 Нельзя создать завку с пустым полем Комментарий, или комментарием из произвольного количества пробелов")
     @Test
     public void shouldShowErrorWithSpacesInCommentFields(){
-        openNewClaimPage();
-        AddNewClaimPage.titleField.perform(typeText("login2"));
-        AddNewClaimPage.dateField.perform(click());
-        pauseShort();
-        AddNewClaimPage.calendarOkButton.perform(click());
-        pauseShort();
-        AddNewClaimPage.timeField.perform(click());
-        pauseShort();
-        AddNewClaimPage.timeOKButton.perform(click());
-        pauseShort();
-        AddNewClaimPage.descriptionField.perform(typeText("     "));
-        AddNewClaimPage.descriptionField.perform(closeSoftKeyboard());
-        AddNewClaimPage.saveButton.perform(click());
-        pauseShort();
+        AddNewClaimPage.titleFieldType("login2");
+        AddNewClaimPage.dateFieldClick();
+        AddNewClaimPage.calendarOkButtonClick();
+        AddNewClaimPage.timeFieldClick();
+        AddNewClaimPage.timeOKButtonClick();
+        AddNewClaimPage.descriptionFieldType("     ");
+        AddNewClaimPage.descriptionFieldHide();
+        AddNewClaimPage.saveButtonClick();
 
-        AddNewClaimPage.emptyFieldMessage.check(matches(isDisplayed()));
-        AddNewClaimPage.emptyFieldOkButton.check(matches(isDisplayed()));
-        AddNewClaimPage.emptyFieldMessage.check(matches(withText("Заполните пустые поля")));
-        AddNewClaimPage.emptyFieldOkButton.check(matches(withText("OK")));
-        AddNewClaimPage.emptyFieldOkButton.check(matches(isClickable()));
+        AddNewClaimPage.emptyFieldMessageCheck();
 
-        AddNewClaimPage.emptyFieldOkButton.perform(click());
+        AddNewClaimPage.emptyFieldOkButtonClick();
         pauseShort();
-        AddNewClaimPage.descriptionField.perform(closeSoftKeyboard());
-        pauseShort();
+        AddNewClaimPage.descriptionFieldHide();
         clickBack();
     }
 }
