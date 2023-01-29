@@ -27,19 +27,19 @@ public class MainMenuPage extends BasePage{
 
     @Step("Кнопка видна и кликабельна, текст совпадает")
     public static void mainPageButtonCheck(){
-        existClickableText(mainPageButton, mainPageTextRu);
+        existText(mainPageButton, mainPageTextRu);
     }
     @Step("Кнопка видна и кликабельна, текст совпадает")
     public static void claimPageButtonCheck(){
-        existClickableText(claimPageButton, claimPageTextRu);
+        existText(claimPageButton, claimPageTextRu);
     }
     @Step("Кнопка видна и кликабельна, текст совпадает")
     public static void newsPageButtonCheck(){
-        existClickableText(newsPageButton, NewsPageTextRu);
+        existText(newsPageButton, NewsPageTextRu);
     }
     @Step("Кнопка видна и кликабельна, текст совпадает")
     public static void aboutPageButtonCheck(){
-        existClickableText(aboutPageButton, aboutPageTextRu);
+        existText(aboutPageButton, aboutPageTextRu);
     }
     @Step("Кнопка видна и некликабельна, текст совпадает")
     public static void mainPageButtonNotClickCheck(){

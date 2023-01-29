@@ -1,9 +1,6 @@
 package ru.iteco.fmhandroid.ui.Tests;
 
 
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;

@@ -18,7 +18,7 @@ public class LkMenuPage extends BasePage{
 
     @Step("Кнопка видна и кликабельна, текст соответстует")
     public static void logoutButtonCheck(){
-        existNotClickableText(logoutButton, "Авторизация");
+        existNotClickableText(logoutButton, "Выйти");
     }
     @Step("Тап по кнопке Выйти")
     public static void logoutButtonClick(){

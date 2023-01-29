@@ -3,6 +3,7 @@ package ru.iteco.fmhandroid.ui.Pages;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -37,7 +38,8 @@ public class NewsCard extends BasePage{
 
     @Step("Проверка наличия кнопки")
     public static void deleteButtonCheck(){
-        existClickable(onView(withIndex(withId(R.id.delete_news_item_image_view), 0)));
+        onView(withIndex(withId(R.id.delete_news_item_image_view), 0)).check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.delete_news_item_image_view), 0)).check(matches(isClickable()));
     }
     @Step("Тап по кнопке")
     public static void deleteButtonClick(){
@@ -45,7 +47,8 @@ public class NewsCard extends BasePage{
     }
     @Step("Проверка наличия кнопки")
     public static void editButtonCheck(){
-        existClickable(onView(withIndex(withId(R.id.edit_news_item_image_view), 0)));
+        onView(withIndex(withId(R.id.edit_news_item_image_view), 0)).check(matches(isDisplayed()));
+        onView(withIndex(withId(R.id.edit_news_item_image_view), 0)).check(matches(isClickable()));
     }
     @Step("Тап по кнопке")
     public static void editButtonClick(){
@@ -53,7 +56,7 @@ public class NewsCard extends BasePage{
     }
     @Step("Проверка наличия кнопки status change")
     public static void statusButtonCheck(){
-        exist(onView(withIndex(withId(R.id.view_news_item_image_view), 0)));
+        onView(withIndex(withId(R.id.view_news_item_image_view), 0)).check(matches(isDisplayed()));
     }
     @Step("Тап по кнопке")
     public static void statusButtonClick(){

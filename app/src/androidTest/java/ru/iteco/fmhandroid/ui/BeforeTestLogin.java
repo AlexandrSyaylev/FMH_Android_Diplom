@@ -24,8 +24,10 @@ public class BeforeTestLogin extends BasePage {
 
         }catch (androidx.test.espresso.PerformException e){
             System.out.println("Already login");
+            pauseShort();
         }catch (androidx.test.espresso.NoMatchingViewException e){
             System.out.println("Already login");
+            pauseShort();
         }
     }
 

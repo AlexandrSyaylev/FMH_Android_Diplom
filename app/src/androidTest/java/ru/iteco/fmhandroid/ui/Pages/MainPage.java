@@ -58,11 +58,11 @@ public class MainPage extends BasePage {
     }
     @Step("Проверка что блок отображается")
     public static void containerNewsHeaderCheck(){
-        exist(newsContainerOneClickable);
+        exist(containerNewsHeader);
     }
     @Step("Тап по блоку, появляется блок Описание")
     public static void containerNewsHeaderClick(){
-        exist(containerNewsHeader);
+        containerNewsHeader.perform(click());
         onView(withIndex(withId(R.id.news_item_description_text_view), 1)).check(matches(isDisplayed()));
     }
     @Step("Проверка что кнопка отображается")
@@ -103,7 +103,7 @@ public class MainPage extends BasePage {
     }
     @Step("Проверка что отображается заголовок Новости")
     public static void newsHeaderTitleCheck(){
-        existText(newsHeaderTitle, "Заявки");
+        existText(newsHeaderTitle, "Новости");
     }
     @Step("Проверка что кнопка отображается")
     public static void newsCollapseButtonCheck(){

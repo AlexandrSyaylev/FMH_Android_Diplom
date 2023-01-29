@@ -1,6 +1,7 @@
 package ru.iteco.fmhandroid.ui.Pages;
 
 import static androidx.test.espresso.Espresso.onView;
+import static androidx.test.espresso.action.ViewActions.clearText;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -77,7 +78,7 @@ public class AddNewNewsPage extends BasePage{
     }
     @Step("Очистить поле")
     public static void categoryFieldClear() {
-        categoryField.perform(click());
+        categoryField.perform(clearText());
         pauseSSt();
     }
     @Step("Скрыть клавиатуру")
@@ -92,7 +93,7 @@ public class AddNewNewsPage extends BasePage{
     }
     @Step("Очистить поле")
     public static void descriptionFieldClear() {
-        descriptionField.perform(click());
+        descriptionField.perform(clearText());
         pauseSSt();
     }
     @Step("Скрыть клавиатуру")
