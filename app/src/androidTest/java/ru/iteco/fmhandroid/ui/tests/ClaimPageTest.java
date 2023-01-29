@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -12,11 +12,11 @@ import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.ClaimCard;
-import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.pages.ClaimCard;
+import ru.iteco.fmhandroid.ui.pages.ClaimPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
 
 public class ClaimPageTest extends BeforeTestLogin {
     @Before

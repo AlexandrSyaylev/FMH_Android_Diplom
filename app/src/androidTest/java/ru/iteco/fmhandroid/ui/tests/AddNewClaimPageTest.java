@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,9 +7,9 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
-import ru.iteco.fmhandroid.ui.Pages.MainPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
 
 public class AddNewClaimPageTest extends BeforeTestLogin {
     @Before

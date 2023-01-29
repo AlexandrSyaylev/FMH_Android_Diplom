@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,12 +7,12 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsCard;
-import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.NewsCard;
+import ru.iteco.fmhandroid.ui.pages.NewsControlPage;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class NewsControlPageTest extends BeforeTestLogin {
     @Before

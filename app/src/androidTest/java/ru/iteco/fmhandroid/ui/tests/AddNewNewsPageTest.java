@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -12,11 +12,11 @@ import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.NewsControlPage;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class AddNewNewsPageTest extends BeforeTestLogin {
     @Before

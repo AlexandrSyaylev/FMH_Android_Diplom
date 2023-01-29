@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

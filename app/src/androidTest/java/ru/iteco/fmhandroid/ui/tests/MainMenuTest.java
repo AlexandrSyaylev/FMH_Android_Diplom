@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 
 import org.junit.Test;
@@ -7,12 +7,12 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AboutPage;
-import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.MainPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AboutPage;
+import ru.iteco.fmhandroid.ui.pages.ClaimPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class MainMenuTest extends BeforeTestLogin {
 

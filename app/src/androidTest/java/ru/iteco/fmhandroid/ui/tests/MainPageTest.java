@@ -1,9 +1,8 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
 import org.junit.Test;
@@ -13,13 +12,13 @@ import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.MainPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsCard;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.pages.ClaimPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
+import ru.iteco.fmhandroid.ui.pages.NewsCard;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class MainPageTest extends BeforeTestLogin {
     @Description("На Главной странице присутствует Хедер и он содержит ...")

@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
@@ -21,11 +21,11 @@ import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.BasePage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.LoginPage;
-import ru.iteco.fmhandroid.ui.Pages.SplashScreenPage;
+import ru.iteco.fmhandroid.ui.pages.BasePage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
+import ru.iteco.fmhandroid.ui.pages.LoginPage;
+import ru.iteco.fmhandroid.ui.pages.SplashScreenPage;
 
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 @RunWith(AllureAndroidJUnit4.class)

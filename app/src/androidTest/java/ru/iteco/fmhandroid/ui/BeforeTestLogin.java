@@ -5,11 +5,11 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.iteco.fmhandroid.ui.Pages.BasePage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.LoginPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.BasePage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
+import ru.iteco.fmhandroid.ui.pages.LoginPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
 
 @RunWith(AllureAndroidJUnit4.class)
 public class BeforeTestLogin extends BasePage {
