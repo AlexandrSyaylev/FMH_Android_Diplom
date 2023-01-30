@@ -62,7 +62,7 @@ public class LoginPageTest extends BasePage {
         LoginPage.passwordFieldAsTextFieldClick();
         assertTrue(isKeyboardOpenedShellCheck());
         clickBack();
-        pauseShort();
+        waitUntilKeyboardHide();
         assertFalse(isKeyboardOpenedShellCheck());
     }
 

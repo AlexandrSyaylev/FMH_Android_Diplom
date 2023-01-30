@@ -121,7 +121,6 @@ public class AddNewNewsPage extends BasePage{
     public static void timeOKButtonClick(){
         waitUntilElement(android.R.id.button1);
         timeOKButton.perform(click());
-        pauseShort();
     }
     @Step("Тап по кнопке")
     public static void timeCancelButtonClick(){

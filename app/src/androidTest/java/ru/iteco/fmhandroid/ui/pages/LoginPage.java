@@ -73,7 +73,6 @@ public class LoginPage extends BasePage{
     public static void loginButtonClick(){
         waitUntilElement("Войти");
         loginButton.perform(click());
-        pauseShort();
     }
 
     @Step("Ввести текст в поле Логин")

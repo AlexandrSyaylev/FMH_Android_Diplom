@@ -119,7 +119,6 @@ public class BasePage {
 
     public static void clickBack() {
         onView(isRoot()).perform(pressBack());
-        pauseShort();
     }
     public static void pause() {onView(isRoot()).perform(waitFor(5500));}
     public static void pauseShort() {onView(isRoot()).perform(waitFor(1000));}

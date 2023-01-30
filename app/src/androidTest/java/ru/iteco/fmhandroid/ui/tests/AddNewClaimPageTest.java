@@ -35,7 +35,6 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
     @Test
     public void shouldShowPopupWhenTapCancelButton(){
         AddNewClaimPage.titleFieldClickAndHide();
-        pauseShort();
         AddNewClaimPage.cancelButtonClick();
         AddNewClaimPage.noChangesMessageCheck();
 
@@ -104,7 +103,6 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.emptyFieldMessageCheck();
 
         AddNewClaimPage.emptyFieldOkButtonClick();
-        pauseShort();
         AddNewClaimPage.descriptionFieldHide();
         clickBack();
     }
