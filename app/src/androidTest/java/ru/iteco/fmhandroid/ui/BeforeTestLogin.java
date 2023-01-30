@@ -5,36 +5,33 @@ import org.junit.Before;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import ru.iteco.fmhandroid.ui.Pages.BasePage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.LoginPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.BasePage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
+import ru.iteco.fmhandroid.ui.pages.LoginPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
 
 @RunWith(AllureAndroidJUnit4.class)
 public class BeforeTestLogin extends BasePage {
     @Before
     public void login() {
-        pause();
         try{
             LoginPage.loginFieldAsTextFieldType("login2");
             LoginPage.passwordFieldAsTextFieldType("password2");
             LoginPage.loginButtonClick();
-            pauseShort();
-
         }catch (androidx.test.espresso.PerformException e){
             System.out.println("Already login");
-            pauseShort();
         }catch (androidx.test.espresso.NoMatchingViewException e){
             System.out.println("Already login");
-            pauseShort();
+        }finally {
+            MainPage.waitLoadMainPage();
         }
     }
 
     @After
     public void logout() {
         try {
-            pauseSSt();
             HeaderPage.lkButtonClick();
             LkMenuPage.logoutButtonClick();
         }catch (androidx.test.espresso.PerformException e){

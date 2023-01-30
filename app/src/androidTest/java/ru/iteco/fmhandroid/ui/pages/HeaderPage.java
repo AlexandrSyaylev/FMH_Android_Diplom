@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -17,6 +17,7 @@ public class HeaderPage extends BasePage {
 
     @Step("Кнопка видна и кликабельна")
     public static void mainMenuButtonCheck(){
+        waitUntilElement(R.id.main_menu_image_button);
         existClickable(mainMenuButton);
     }
     @Step("Кнопка видна и кликабельна")
@@ -29,23 +30,24 @@ public class HeaderPage extends BasePage {
     }
     @Step("Лого присутствует и не кликабелен")
     public static void logoCheck(){
+        waitUntilElement(R.id.trademark_image_view);
         existNotClickable(logoView);
     }
 
     @Step("Тап по кнопке")
     public static void mainMenuButtonClick(){
+        waitUntilElement(R.id.main_menu_image_button);
         mainMenuButton.perform(click());
-        pauseShort();
     }
     @Step("Тап по кнопке")
     public static void thematicButtonClick(){
+        waitUntilElement(R.id.our_mission_image_button);
         thematicButton.perform(click());
-        pauseShort();
     }
     @Step("Тап по кнопке")
     public static void lkButtonClick(){
+        waitUntilElement(R.id.authorization_image_button);
         lkButton.perform(click());
-        pauseSSt();
     }
 
 }

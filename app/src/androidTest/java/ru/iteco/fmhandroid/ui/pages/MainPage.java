@@ -1,8 +1,9 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
@@ -52,6 +53,10 @@ public class MainPage extends BasePage {
         )));
     }
 
+    @Step("Wait for loading page")
+    public static void waitLoadMainPage(){
+        waitUntilElement(R.id.news_item_material_card_view);
+    }
     @Step("Проверка что блок отображается")
     public static void newsContainerOneClickableCheck(){
         exist(newsContainerOneClickable);
@@ -72,6 +77,7 @@ public class MainPage extends BasePage {
     @Step("Тап по кнопке")
     public static void claimAddNewButtonClick(){
         claimAddNewButton.perform(click());
+        waitUntilElement("Заявки");
     }
     @Step("Проверка что кнопка отображается")
     public static void claimExpandButtonCheck(){
@@ -91,6 +97,7 @@ public class MainPage extends BasePage {
     }
     @Step("Проверка что отображается заголовок Заявки")
     public static void claimBlockHeaderCheck(){
+        waitUntilElement("Заявки");
         existText(claimBlockHeader, "Заявки");
     }
     @Step("Свайп вверх на объекте")
@@ -103,6 +110,7 @@ public class MainPage extends BasePage {
     }
     @Step("Проверка что отображается заголовок Новости")
     public static void newsHeaderTitleCheck(){
+        waitUntilElement("Новости");
         existText(newsHeaderTitle, "Новости");
     }
     @Step("Проверка что кнопка отображается")
@@ -124,6 +132,10 @@ public class MainPage extends BasePage {
     @Step("Тап по кнопке")
     public static void newsAllNewsButtonClick(){
         newsAllNewsButton.perform(click());
+    }
+    @Step("Проверка карточки новостей")
+    public static void newsOneClickable(){
+        onView(withIndex(withId(R.id.news_item_material_card_view), 1)).check(matches(isClickable()));
     }
 
     @Step("Проверка что контейнер свернут")

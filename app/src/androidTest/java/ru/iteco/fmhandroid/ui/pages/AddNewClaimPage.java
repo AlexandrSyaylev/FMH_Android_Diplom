@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -53,57 +53,51 @@ public class AddNewClaimPage extends BasePage{
 
     @Step("Проверка наличия заголовка Создание страницы")
     public static void titleHeaderCheck(){
+        waitUntilElement(R.id.custom_app_bar_title_text_view);
         titleHeader.check(matches(isDisplayed()));
     }
     @Step("Тапнуть по кнопке Отмена страницы создание заявки")
     public static void cancelButtonClick(){
+        waitUntilElement(R.id.cancel_button);
         cancelButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке Отмена окна сообщения")
     public static void noSaveChangesCancelButtonClick(){
+        waitUntilElement("Отмена");
         noSaveChangesCancelButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке OK")
     public static void calendarOkButtonClick(){
         calendarOkButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке OK")
     public static void timeFieldClick(){
         timeField.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке")
     public static void timeOKButtonClick(){
         timeOKButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке OK")
     public static void dateFieldClick(){
         dateField.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке Сохранить")
     public static void saveButtonClick(){
         saveButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке Сохранить")
     public static void emptyFieldOkButtonClick(){
         emptyFieldOkButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по кнопке OK окна сообщения")
     public static void noSaveChangesOkButtonClick(){
         noSaveChangesOkButton.perform(click());
-        pauseShort();
     }
     @Step("Тапнуть по полю и спрятать клавиатуру")
     public static void descriptionFieldHide(){
         descriptionField.perform(closeSoftKeyboard());
-        pauseShort();
+        waitUntilKeyboardHide();
     }
     @Step("Тапнуть по полю и спрятать клавиатуру")
     public static void titleFieldClickAndHide(){
@@ -149,7 +143,7 @@ public class AddNewClaimPage extends BasePage{
     }
     @Step("Проверка сообщения об ошибке в виде вспылающего окна")
     public static void emptyFieldMessageCheck(){
-        pauseSSt();
+        waitUntilElement("Заполните пустые поля");
         emptyFieldMessage.check(matches(isDisplayed()));
         emptyFieldOkButton.check(matches(isDisplayed()));
         emptyFieldMessage.check(matches(withText("Заполните пустые поля")));
@@ -158,7 +152,7 @@ public class AddNewClaimPage extends BasePage{
     }
     @Step("проверка сообщения о несохраненных изменениях на странице")
     public static void noChangesMessageCheck(){
-        pauseSSt();
+        waitUntilElement("Изменения не будут сохранены. Вы действительно хотите выйти?");
         noSaveChangesMessage.check(matches(isDisplayed()));
         noSaveChangesMessage.check(matches(withText("Изменения не будут сохранены. Вы действительно хотите выйти?")));
         noSaveChangesCancelButton.check(matches(isDisplayed()));

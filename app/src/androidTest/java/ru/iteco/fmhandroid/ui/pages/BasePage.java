@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 
 import static androidx.test.espresso.Espresso.onView;
@@ -10,6 +10,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
 import static androidx.test.espresso.matcher.ViewMatchers.withHint;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.CoreMatchers.not;
 
@@ -19,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 
 import androidx.test.InstrumentationRegistry;
+import androidx.test.espresso.PerformException;
 import androidx.test.espresso.Root;
 import androidx.test.espresso.UiController;
 import androidx.test.espresso.ViewAction;
@@ -27,6 +29,8 @@ import androidx.test.espresso.action.GeneralLocation;
 import androidx.test.espresso.action.GeneralSwipeAction;
 import androidx.test.espresso.action.Press;
 import androidx.test.espresso.action.Swipe;
+import androidx.test.espresso.util.HumanReadables;
+import androidx.test.espresso.util.TreeIterables;
 import androidx.test.ext.junit.rules.ActivityScenarioRule;
 import androidx.test.uiautomator.UiDevice;
 
@@ -38,9 +42,12 @@ import org.hamcrest.TypeSafeMatcher;
 import org.junit.Rule;
 
 import java.io.IOException;
+import java.util.concurrent.TimeoutException;
 
 import io.qameta.allure.android.rules.ScreenshotRule;
+import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 
 public class BasePage {
     @Rule
@@ -48,6 +55,27 @@ public class BasePage {
     @Rule
     public ActivityScenarioRule<AppActivity> mActivityScenarioRule =
             new ActivityScenarioRule<>(AppActivity.class);
+
+    private static long waitTimeout = 6500;
+    public static void waitUntilElement(final int viewId){
+        onView(isRoot()).perform(waitId(viewId, waitTimeout));
+    }
+    public static void waitUntilElement(final String text){
+        onView(isRoot()).perform(waitId(text, waitTimeout));
+    }
+    public static void waitUntilPopup(final String text){
+        onView(isRoot()).inRoot(isPopupWindow()).perform(waitId(text, waitTimeout));
+    }
+    public static void waitUntilKeyboardHide(){
+        while(isKeyboardOpenedShellCheck()){
+            final long startTime = System.currentTimeMillis();
+            final long endTime = startTime + waitTimeout;
+            waitFor(50);
+            if(System.currentTimeMillis() >= endTime){
+                return;
+            }
+        };
+    }
 
     public static void exist(ViewInteraction item){
         item.check(matches(isDisplayed()));
@@ -91,7 +119,6 @@ public class BasePage {
 
     public static void clickBack() {
         onView(isRoot()).perform(pressBack());
-        pauseShort();
     }
     public static void pause() {onView(isRoot()).perform(waitFor(5500));}
     public static void pauseShort() {onView(isRoot()).perform(waitFor(1000));}
@@ -99,6 +126,80 @@ public class BasePage {
 
     public static Matcher<Root> isPopupWindow() {
         return isPlatformPopup();
+    }
+
+    public static ViewAction waitId(final int viewId, final long millis) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isRoot();
+            }
+            @Override
+            public String getDescription() {
+                return "wait for a specific view with id <" + viewId + "> during " + millis + " millis.";
+            }
+            @Override
+            public void perform(final UiController uiController, final View view) {
+                uiController.loopMainThreadUntilIdle();
+                final long startTime = System.currentTimeMillis();
+                final long endTime = startTime + millis;
+                final Matcher<View> viewMatcher = withId(viewId);
+
+                do {
+                    for (View child : TreeIterables.breadthFirstViewTraversal(view)) {
+                        // found view with required ID
+                        if (viewMatcher.matches(child)) {
+                            return;
+                        }
+                    }
+                    uiController.loopMainThreadForAtLeast(50);
+                }
+                while (System.currentTimeMillis() < endTime);
+                // timeout happens
+                throw new PerformException.Builder()
+                        .withActionDescription(this.getDescription())
+                        .withViewDescription(HumanReadables.describe(view))
+                        .withCause(new TimeoutException())
+                        .build();
+            }
+        };
+    }
+    public static ViewAction waitId(final String viewText, final long millis) {
+        return new ViewAction() {
+            @Override
+            public Matcher<View> getConstraints() {
+                return isRoot();
+            }
+            @Override
+            public String getDescription() {
+//                return "wait for a specific view with id <" + viewText + "> during " + millis + " millis.";
+                return "wait up to " + millis + " for the view to have text" + viewText;
+            }
+            @Override
+            public void perform(final UiController uiController, final View view) {
+                uiController.loopMainThreadUntilIdle();
+                final long startTime = System.currentTimeMillis();
+                final long endTime = startTime + millis;
+                final Matcher<View> viewMatcher = withText(viewText);
+
+                do {
+                    for (View child : TreeIterables.breadthFirstViewTraversal(view)) {
+                        // found view with required ID
+                        if (viewMatcher.matches(child)) {
+                            return;
+                        }
+                    }
+                    uiController.loopMainThreadForAtLeast(50);
+                }
+                while (System.currentTimeMillis() < endTime);
+                // timeout happens
+                throw new PerformException.Builder()
+                        .withActionDescription(this.getDescription())
+                        .withViewDescription(HumanReadables.describe(view))
+                        .withCause(new TimeoutException())
+                        .build();
+            }
+        };
     }
 
     public static ViewAction waitFor(final long millis) {
@@ -135,7 +236,7 @@ public class BasePage {
         };
     }
 
-    public class ToastMatcher extends TypeSafeMatcher<Root> {
+    public static class ToastMatcher extends TypeSafeMatcher<Root> {
         @Override    public void describeTo(Description description) {
             description.appendText("is toast");
         }
@@ -196,7 +297,7 @@ public class BasePage {
         return new GeneralSwipeAction(Swipe.FAST, GeneralLocation.BOTTOM_CENTER,GeneralLocation.TOP_RIGHT, Press.FINGER);
     }
 
-    public boolean isKeyboardOpenedShellCheck() {
+    public static boolean isKeyboardOpenedShellCheck() {
         String checkKeyboardCmd = "dumpsys input_method | grep mInputShown";
         try {
             return UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())

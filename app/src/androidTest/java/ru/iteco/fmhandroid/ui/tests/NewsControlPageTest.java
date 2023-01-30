@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Tests;
+package ru.iteco.fmhandroid.ui.tests;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -7,21 +7,19 @@ import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewNewsPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.MainMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsCard;
-import ru.iteco.fmhandroid.ui.Pages.NewsControlPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.NewsCard;
+import ru.iteco.fmhandroid.ui.pages.NewsControlPage;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class NewsControlPageTest extends BeforeTestLogin {
     @Before
     public void openControlPage(){
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.newsPageButtonClick();
-        pauseShort();
         NewsPage.controlPanelButtonClick();
-        pauseShort();
     }
 
     @Description("На странице в заголовке блока есть текст \"Панель управления\"...")
@@ -38,7 +36,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
         NewsCard.statusButtonCheck();
 
         NewsCard.newsCardFullDescriptionsCheck();
-        pauseShort();
         NewsCard.newsCardFullClick();
     }
 
@@ -48,7 +45,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenFilterPage(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterBaseCheck();
         NewsControlPage.filterActiveSwitchCheck();
         NewsControlPage.filterInactiveSwitchCheck();
@@ -63,7 +59,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveCategories(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterCategoryClick();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
@@ -76,13 +71,10 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterDateStartClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         AddNewNewsPage.timeOKButtonClick();
         NewsPage.filterDateEndClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         AddNewNewsPage.timeOKButtonClick();
         clickBack();
@@ -94,7 +86,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenAddNewNewsPAgeWhenTapOnButton(){
         NewsPage.addNewNewsButtonClick();
-        pauseShort();
         AddNewNewsPage.titleCheck("Создание");
         clickBack();
     }

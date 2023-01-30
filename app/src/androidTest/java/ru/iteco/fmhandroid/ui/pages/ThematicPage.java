@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -29,20 +29,21 @@ public class ThematicPage extends BasePage{
         onView(withIndex(withId(R.id.our_mission_item_title_text_view), 0)).check(matches(isDisplayed()));
         onView(withIndex(withId(R.id.our_mission_item_description_text_view), 0)).check(matches(not(isDisplayed())));
     }
-
     @Step("Проверка отображения поля Описание при Тапе")
     public static void descriptionCheck(){
         onView(withIndex(withId(R.id.our_mission_item_material_card_view), 0)).perform(click());
         onView(withIndex(withId(R.id.our_mission_item_title_text_view), 0)).check(matches(isDisplayed()));
     }
-
     @Step("Проверка наличия заголовка")
     public static void titleCheck(){
         titleText.check(matches(isDisplayed()));
     }
-
     @Step("Проверка наличия заголовка")
     public static void titleTextCheck(){
         existText(titleText,"Главное - жить любя");
+    }
+    @Step("Свайп блока вверх")
+    public static void swipeUp(){
+        onView(withIndex(withId(R.id.our_mission_item_material_card_view), 2)).perform(customSwipeUp());
     }
 }

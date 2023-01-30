@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -47,6 +47,7 @@ public class ClaimCard extends BasePage{
 
     @Step("Проверка элементов в каротчке(свернутая)")
     public static void cardShortCheck(){
+        waitUntilElement(R.id.title_material_text_view);
         claimThemeTitle.check(matches(isDisplayed()));
         claimThemeDescription.check(matches(isDisplayed()));
         claimExecutorTitle.check(matches(isDisplayed()));
@@ -62,6 +63,7 @@ public class ClaimCard extends BasePage{
     }
     @Step("Проврека заголовка")
     public static void claimThemeTitleFullCheck(){
+        waitUntilElement(R.id.title_label_text_view);
         existText(claimThemeTitleFull, "Тема");
     }
     @Step("Проверка элементов в каротчке(развернуто)")

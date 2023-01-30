@@ -1,25 +1,18 @@
-package ru.iteco.fmhandroid.ui.Tests;
-
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
+package ru.iteco.fmhandroid.ui.tests;
 
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
-import ru.iteco.fmhandroid.ui.Pages.AddNewClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.ClaimPage;
-import ru.iteco.fmhandroid.ui.Pages.HeaderPage;
-import ru.iteco.fmhandroid.ui.Pages.LkMenuPage;
-import ru.iteco.fmhandroid.ui.Pages.MainPage;
-import ru.iteco.fmhandroid.ui.Pages.NewsCard;
-import ru.iteco.fmhandroid.ui.Pages.NewsPage;
+import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
+import ru.iteco.fmhandroid.ui.pages.ClaimPage;
+import ru.iteco.fmhandroid.ui.pages.HeaderPage;
+import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
+import ru.iteco.fmhandroid.ui.pages.NewsCard;
+import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class MainPageTest extends BeforeTestLogin {
     @Description("На Главной странице присутствует Хедер и он содержит ...")
@@ -62,7 +55,7 @@ public class MainPageTest extends BeforeTestLogin {
         MainPage.claimBlockHeaderSwipe();
         MainPage.claimAddNewButtonCheck();
         MainPage.claimExpandButtonCheck();
-        onView(withIndex(withId(R.id.news_item_material_card_view), 1)).check(matches(isClickable()));
+        MainPage.newsOneClickable();
         MainPage.claimShowAllButtonCheck();
     }
 
@@ -80,10 +73,8 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenPageNewsWhenTapOnButtonAllNews(){
         MainPage.newsAllNewsButtonClick();
-        pauseShort();
         NewsPage.titleNewsHeaderCheck();
         clickBack();
-        pauseShort();
         MainPage.claimBlockHeaderCheck();
     }
 
@@ -93,10 +84,8 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenPageClaimsWhenTapOnButtonAllClaims(){
         MainPage.claimShowAllButtonClick();
-        pauseShort();
         ClaimPage.titleClaimHeaderCheck();
         clickBack();
-        pauseShort();
         MainPage.newsHeaderTitleCheck();
     }
 
@@ -106,7 +95,6 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldShowHeaderWhenSwipeUp(){
         MainPage.claimShowAllButtonSwipe();
-        pauseShort();
         HeaderPage.logoCheck();
     }
 
@@ -117,7 +105,6 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenAddNewClaimPageWhenTapAddClaimButton(){
         MainPage.claimAddNewButtonClick();
-        pauseShort();
         AddNewClaimPage.titleHeaderCheck();
         clickBack();
         MainPage.newsHeaderTitleCheck();

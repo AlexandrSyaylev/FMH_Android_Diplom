@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.clearText;
@@ -59,22 +59,32 @@ public class AddNewNewsPage extends BasePage{
     private static ViewInteraction timeOKButton = onView(withId(android.R.id.button1));
     private static ViewInteraction timeCancelButton = onView(withId(android.R.id.button2));
 
+    @Step("Ожидание загузки страницы")
+    public static void newsAddEditPageLoadWaits(){
+        waitUntilElement(R.id.save_button);
+    }
     @Step("Тап по кнопке")
     public static void saveButtonClick(){
+        waitUntilElement(R.id.save_button);
         saveButton.perform(click());
+    }
+    @Step("Проверка кнопки")
+    public static void saveButtonCheck(){
+        waitUntilElement(R.id.save_button);
     }
     @Step("Тап по кнопке")
     public static void cancelButtonClick(){
+        waitUntilElement(R.id.cancel_button);
         cancelButton.perform(click());
     }
     @Step("Тап по кнопке")
     public static void noSaveChangesOkButtonClick(){
+        waitUntilElement(android.R.id.button1);
         noSaveChangesOkButton.perform(click());
     }
     @Step("Тап по полю")
     public static void categoryFieldClick() {
         categoryField.perform(click());
-        pauseSSt();
     }
     @Step("Очистить поле")
     public static void categoryFieldClear() {
@@ -84,44 +94,42 @@ public class AddNewNewsPage extends BasePage{
     @Step("Скрыть клавиатуру")
     public static void categoryFieldHide() {
         categoryField.perform(closeSoftKeyboard());
-        pauseShort();
     }
     @Step("Тап по полю")
     public static void descriptionFieldClick() {
         descriptionField.perform(click());
-        pauseSSt();
     }
     @Step("Очистить поле")
     public static void descriptionFieldClear() {
         descriptionField.perform(clearText());
-        pauseSSt();
     }
     @Step("Скрыть клавиатуру")
     public static void descriptionFieldHide() {
         descriptionField.perform(closeSoftKeyboard());
-        pauseShort();
+        waitUntilKeyboardHide();
     }
     @Step("Тап по полю")
     public static void dateFieldClick(){
+        waitUntilElement(R.id.news_item_publish_date_text_input_edit_text);
         dateField.perform(click());
-        pauseShort();
     }
     @Step("Тап по полю")
     public static void timeFieldClick(){
         timeField.perform(click());
-        pauseShort();
     }
     @Step("Тап по кнопке")
     public static void timeOKButtonClick(){
+        waitUntilElement(android.R.id.button1);
         timeOKButton.perform(click());
-        pauseShort();
     }
     @Step("Тап по кнопке")
     public static void timeCancelButtonClick(){
+        waitUntilElement(android.R.id.button2);
         timeCancelButton.perform(click());
     }
     @Step("Проверка заголовка страницы")
     public static void titleCheck(String text){
+        waitUntilElement(R.id.custom_app_bar_title_text_view);
         existText(titleHeader, text);
         existText(subTitleHeader, "Новости");
     }
@@ -131,6 +139,7 @@ public class AddNewNewsPage extends BasePage{
     }
     @Step("Проверка элементов на странице")
     public static void fieldsCheck(){
+        waitUntilElement(R.id.news_item_category_text_auto_complete_text_view);
         categoryField.check(matches(isDisplayed()));
         categoryFieldIconDropDown.check(matches(isDisplayed()));
         titleField.check(matches(isDisplayed()));
@@ -153,6 +162,7 @@ public class AddNewNewsPage extends BasePage{
     }
     @Step("Проверка плэйсхолдеров на странице")
     public static void placeholdersCheck(){
+        waitUntilElement(R.id.news_item_category_text_auto_complete_text_view);
         categoryField.check(matches(withHint("Категория")));
         titleField.check(matches(withHint("Заголовок")));
         dateField.check(matches(withHint("Дата публикации")));
@@ -164,10 +174,10 @@ public class AddNewNewsPage extends BasePage{
     public static void openDropList(){
         categoryField.perform(click());
         categoryField.perform(closeSoftKeyboard());
-        pauseShort();
     }
     @Step("Проверка Каледнаря (базовая)")
     public static void calendarBaseCheck(){
+        waitUntilElement(android.R.id.custom);
         calendarView.check(matches(isDisplayed()));
         calendarCancelButton.check(matches(isDisplayed()));
         calendarOkButton.check(matches(isDisplayed()));
@@ -177,6 +187,7 @@ public class AddNewNewsPage extends BasePage{
 
     @Step("Проверка часов (базовая)")
     public static void clockBaseCheck(){
+        waitUntilElement(android.R.id.custom);
         timeHeader.check(matches(isDisplayed()));
         timeCancelButton.check(matches(isDisplayed()));
         timeOKButton.check(matches(isDisplayed()));
@@ -186,6 +197,7 @@ public class AddNewNewsPage extends BasePage{
 
     @Step("Проверка раскрывающегося списка")
     public static void categoryDropListCheck(){
+        waitUntilPopup("Объявление");
         categoryDropDownA.check(matches(isDisplayed()));
         categoryDropDownB.check(matches(isDisplayed()));
         categoryDropDownC.check(matches(isDisplayed()));
@@ -194,5 +206,10 @@ public class AddNewNewsPage extends BasePage{
         categoryDropDownF.check(matches(isDisplayed()));
         categoryDropDownG.check(matches(isDisplayed()));
         categoryDropDownH.check(matches(isDisplayed()));
+    }
+    @Step("Проверка сообщения об ошибке")
+    public static void errorFillEmptyFieldsCheck(){
+        onView(withText(R.string.empty_fields)).inRoot(new ToastMatcher())
+                .check(matches(withText("Заполните пустые поля")));
     }
 }

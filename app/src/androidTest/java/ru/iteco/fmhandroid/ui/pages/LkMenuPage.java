@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -22,6 +22,7 @@ public class LkMenuPage extends BasePage{
     }
     @Step("Тап по кнопке Выйти")
     public static void logoutButtonClick(){
+        waitUntilElement("Выйти");
         logoutButton.perform(click());
     }
 }

@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -27,6 +27,7 @@ public class ClaimPage extends BasePage {
 
     @Step
     public static void titleClaimHeaderCheck(){
+        waitUntilElement("Заявки");
         existText(titleClaimHeader,"Заявки");
     }
     @Step("Тап по кнопке filter")
@@ -55,6 +56,7 @@ public class ClaimPage extends BasePage {
     }
     @Step("Проверка элементов в фильтре")
     public static void filterCheck() {
+        waitUntilElement(R.id.item_filter_open);
         existClickableText(statusOpen, "Открыта");
         existClickableText(statusInProgress, "В работе");
         existClickableText(statusExecuted, "Выполнена");
@@ -77,8 +79,20 @@ public class ClaimPage extends BasePage {
         onView(withText("В работе")).perform(click());
         onView(withText("Отмененные")).perform(click());
         onView(withId(R.id.claim_list_filter_ok_material_button)).perform(click());
-        pauseShort();
+        waitUntilElement(R.id.claim_list_card);
         onView(withIndex(withId(R.id.claim_list_card), 2)).perform(click());
-        pauseShort();
+    }
+    @Step("swipe up cards")
+    public static void claimsSwipeUp(){
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
+        pauseSSt();
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
+        pauseSSt();
+        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
+        pauseSSt();
+    }
+    @Step("Тап по заявке")
+    public static void claimTap(){
+        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click());
     }
 }

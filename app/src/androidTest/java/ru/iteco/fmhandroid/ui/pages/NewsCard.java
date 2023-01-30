@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -94,6 +94,7 @@ public class NewsCard extends BasePage{
     }
     @Step("Тап по карточке")
     public static void newsCardFullClick(){
+        waitUntilElement(R.id.news_item_title_text_view);
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).perform(click());
     }
 }

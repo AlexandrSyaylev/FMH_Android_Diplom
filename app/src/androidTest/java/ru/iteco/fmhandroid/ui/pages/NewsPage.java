@@ -1,4 +1,4 @@
-package ru.iteco.fmhandroid.ui.Pages;
+package ru.iteco.fmhandroid.ui.pages;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -34,6 +34,7 @@ public class NewsPage extends BasePage {
 
     @Step
     public static void titleNewsHeaderCheck(){
+        waitUntilElement("Новости");
         existText(titleNewsHeader, "Новости");
     }
     @Step("Проверка кнопки")
@@ -42,6 +43,7 @@ public class NewsPage extends BasePage {
     }
     @Step("Тап по кнопке")
     public static void filterButtonClick(){
+        waitUntilElement(R.id.filter_news_material_button);
         filterButton.perform(click());
     }
     @Step("Проверка кнопки")
@@ -54,10 +56,12 @@ public class NewsPage extends BasePage {
     }
     @Step("Проверка кнопки")
     public static void controlPanelButtonCheck(){
+        waitUntilElement(R.id.edit_news_material_button);
         existClickable(controlPanelButton);
     }
     @Step("Тап по кнопке")
     public static void controlPanelButtonClick(){
+        waitUntilElement(R.id.edit_news_material_button);
         controlPanelButton.perform(click());
     }
     @Step("Проверка кнопки")
@@ -70,20 +74,27 @@ public class NewsPage extends BasePage {
     }
     @Step("Тап по полю Date")
     public static void filterDateEndClick(){
+        waitUntilElement(R.id.news_item_publish_date_end_text_input_edit_text);
         filterDateEnd.perform(click());
     }
     @Step("Тап по полю Date")
     public static void filterDateStartClick(){
+        waitUntilElement(R.id.news_item_publish_date_start_text_input_edit_text);
         filterDateStart.perform(click());
+    }
+    @Step("Swipe up")
+    public static void swipeUpNewsBlock(){
+        onView(withIndex(withId(R.id.news_item_title_text_view), 4)).perform(customSwipeUp());
     }
     @Step("Тап по полю Категория")
     public static void filterCategoryClick(){
+        waitUntilElement(R.id.news_item_category_text_auto_complete_text_view);
         filterCategory.perform(click());
         pauseSSt();
         filterCategory.perform(closeSoftKeyboard());
-        pauseShort();
     }
     public static void filterBaseCheck(){
+        waitUntilElement(R.id.filter_news_title_text_view);
         filterTitle.check(matches(isDisplayed()));
         filterTitle.check(matches(withText("Фильтровать новости")));
         filterCategory.check(matches(isDisplayed()));
@@ -117,7 +128,9 @@ public class NewsPage extends BasePage {
 
     @Step("Проверка содержимого карточки новости (свернутой)")
     public static void newsCardDescriptionsCheck(){
+        waitUntilElement(R.id.news_item_title_text_view);
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).perform(click());
+        waitUntilElement(R.id.news_item_description_text_view);
         onView(withIndex(withId(R.id.news_item_description_text_view), 0)).check(matches(isDisplayed()));
     }
 }
