@@ -1,19 +1,16 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.MainPage;
 import ru.iteco.fmhandroid.ui.pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
@@ -23,7 +20,6 @@ public class NewsPageTest extends BeforeTestLogin {
     public void openNewsPage() {
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.newsPageButtonClick();
-        pauseShort();
     }
 
     @Description("Страница Новости содержит поля ...")
@@ -52,8 +48,7 @@ public class NewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveHeader(){
         headerCheck();
-        onView(withIndex(withId(R.id.news_item_title_text_view), 4)).perform(customSwipeUp());
-        pauseShort();
+        NewsPage.swipeUpNewsBlock();
         headerCheck();
     }
 
@@ -63,10 +58,8 @@ public class NewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldSwitchToControlPanelAndBack(){
         NewsPage.controlPanelButtonClick();
-        pauseShort();
         NewsControlPage.controlPanelTitleCheck();
         clickBack();
-        pauseShort();
         NewsPage.titleNewsHeaderCheck();
     }
 
@@ -76,7 +69,6 @@ public class NewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenFilterPage(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterBaseCheck();
         clickBack();
     }
@@ -87,11 +79,9 @@ public class NewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveCategories(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterCategoryClick();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
-        pauseSSt();
         clickBack();
     }
 
@@ -101,15 +91,11 @@ public class NewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterDateStartClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         AddNewNewsPage.timeOKButtonClick();
         NewsPage.filterDateEndClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
-        pauseShort();
         AddNewNewsPage.timeOKButtonClick();
         clickBack();
     }

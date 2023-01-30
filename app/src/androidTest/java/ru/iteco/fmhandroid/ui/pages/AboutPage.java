@@ -42,7 +42,6 @@ public class AboutPage extends BasePage {
     @Step("Тап по кнопке")
     public static void backButtonClick(){
         backButton.perform(click());
-        pauseShort();
     }
     @Step("Лого присутствует и не кликабелен")
     public static void logoCheck(){
@@ -50,6 +49,7 @@ public class AboutPage extends BasePage {
     }
     @Step("Присутствует заголовок")
     public static void versionTitleIdCheck(){
+        waitUntilElement(R.id.about_version_title_text_view);
         existText(versionTitleId, aboutUsTextRu);
     }
     @Step("Присутствует заголовок")

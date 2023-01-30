@@ -22,6 +22,7 @@ public class LkMenuPage extends BasePage{
     }
     @Step("Тап по кнопке Выйти")
     public static void logoutButtonClick(){
+        waitUntilElement("Выйти");
         logoutButton.perform(click());
     }
 }

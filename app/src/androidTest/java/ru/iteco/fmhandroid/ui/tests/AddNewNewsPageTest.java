@@ -1,16 +1,11 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.pages.HeaderPage;
@@ -23,10 +18,9 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
     public void openNewNewsPage() {
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.newsPageButtonClick();
-        pauseShort();
+        NewsPage.titleNewsHeaderCheck();
         NewsPage.controlPanelButtonClick();
         NewsPage.addNewNewsButtonClick();
-        pauseShort();
     }
 
     @Description("Страница содержит заголовок \"Создание Новости\"")
@@ -49,8 +43,9 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.openDropList();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
-        pauseShort();
+        AddNewNewsPage.saveButtonCheck();
         clickBack();
+        NewsControlPage.controlPanelTitleCheck();
     }
 
     @Description("При сохранении Новости с хотя бы одним незаполненным полем появляется сообщение \"Заполните пустые поля\"")
@@ -59,11 +54,9 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldShowErrorWithEmptyFields(){
         AddNewNewsPage.saveButtonClick();
-        onView(withText(R.string.empty_fields)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Заполните пустые поля")));
-        pauseShort();
+        AddNewNewsPage.errorFillEmptyFieldsCheck();
         clickBack();
-        pauseShort();
+        NewsControlPage.controlPanelTitleCheck();
     }
 
     @Description("Страница содержит заголовок \"Создание Новости\"")
@@ -84,7 +77,7 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.dateFieldClick();
         AddNewNewsPage.calendarBaseCheck();
         clickBack();
-        pauseShort();
+        AddNewNewsPage.saveButtonCheck();
         clickBack();
     }
 
@@ -96,7 +89,7 @@ public class AddNewNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.timeFieldClick();
         AddNewNewsPage.clockBaseCheck();
         clickBack();
-        pauseShort();
+        AddNewNewsPage.saveButtonCheck();
         clickBack();
     }
 }

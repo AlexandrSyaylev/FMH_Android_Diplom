@@ -1,16 +1,10 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.pages.ClaimPage;
@@ -61,7 +55,7 @@ public class MainPageTest extends BeforeTestLogin {
         MainPage.claimBlockHeaderSwipe();
         MainPage.claimAddNewButtonCheck();
         MainPage.claimExpandButtonCheck();
-        onView(withIndex(withId(R.id.news_item_material_card_view), 1)).check(matches(isClickable()));
+        MainPage.newsOneClickable();
         MainPage.claimShowAllButtonCheck();
     }
 
@@ -79,10 +73,8 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenPageNewsWhenTapOnButtonAllNews(){
         MainPage.newsAllNewsButtonClick();
-        pauseShort();
         NewsPage.titleNewsHeaderCheck();
         clickBack();
-        pauseShort();
         MainPage.claimBlockHeaderCheck();
     }
 
@@ -92,10 +84,8 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenPageClaimsWhenTapOnButtonAllClaims(){
         MainPage.claimShowAllButtonClick();
-        pauseShort();
         ClaimPage.titleClaimHeaderCheck();
         clickBack();
-        pauseShort();
         MainPage.newsHeaderTitleCheck();
     }
 
@@ -105,7 +95,6 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldShowHeaderWhenSwipeUp(){
         MainPage.claimShowAllButtonSwipe();
-        pauseShort();
         HeaderPage.logoCheck();
     }
 
@@ -116,7 +105,6 @@ public class MainPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenAddNewClaimPageWhenTapAddClaimButton(){
         MainPage.claimAddNewButtonClick();
-        pauseShort();
         AddNewClaimPage.titleHeaderCheck();
         clickBack();
         MainPage.newsHeaderTitleCheck();

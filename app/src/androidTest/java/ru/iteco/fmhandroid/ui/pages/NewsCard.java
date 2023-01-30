@@ -94,6 +94,7 @@ public class NewsCard extends BasePage{
     }
     @Step("Тап по карточке")
     public static void newsCardFullClick(){
+        waitUntilElement(R.id.news_item_title_text_view);
         onView(withIndex(withId(R.id.news_item_title_text_view), 0)).perform(click());
     }
 }

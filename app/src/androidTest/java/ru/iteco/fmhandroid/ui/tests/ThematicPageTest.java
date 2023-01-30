@@ -1,15 +1,11 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AboutPage;
 import ru.iteco.fmhandroid.ui.pages.ClaimPage;
@@ -23,7 +19,6 @@ public class ThematicPageTest extends BeforeTestLogin {
     @Before
     public void openPage(){
         HeaderPage.thematicButtonClick();
-        pauseShort();
     }
 
     @Description("На странице Тематические Цитаты представлены необходимые элементы")
@@ -36,7 +31,6 @@ public class ThematicPageTest extends BeforeTestLogin {
         ThematicPage.titleTextCheck();
         menuContainCheck();
 
-        pauseShort();
         HeaderPage.mainMenuButtonClick(); //Main from tematick
         MainMenuPage.mainPageButtonClick();
         MainPage.newsHeaderTitleCheck();
@@ -69,7 +63,7 @@ public class ThematicPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveHeaderAndHeaderShouldBeWhenSwipeUp(){
         headerCheck();
-        onView(withIndex(withId(R.id.our_mission_item_material_card_view), 2)).perform(customSwipeUp());
+        ThematicPage.swipeUp();
         headerCheck();
         ThematicPage.titleCheck();
     }

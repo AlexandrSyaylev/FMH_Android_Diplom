@@ -19,11 +19,9 @@ public class AboutPageTest extends BeforeTestLogin {
     public void shouldHaveRequiredUIElements(){
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.aboutPageButtonClick();
-        pauseShort();
-
+        AboutPage.versionTitleIdCheck();
         AboutPage.backButtonCheck();
         AboutPage.logoCheck();
-        AboutPage.versionTitleIdCheck();
         AboutPage.versionTextIdCheck();
         AboutPage.policyTextIdCheck();
         AboutPage.policyLinkIdCheck();

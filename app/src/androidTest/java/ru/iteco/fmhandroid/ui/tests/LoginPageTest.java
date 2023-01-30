@@ -1,8 +1,5 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
@@ -18,9 +15,7 @@ import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.AppActivity;
-import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.BasePage;
 import ru.iteco.fmhandroid.ui.pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.pages.LkMenuPage;
@@ -35,11 +30,9 @@ public class LoginPageTest extends BasePage {
             new ActivityScenarioRule<>(AppActivity.class);
 
     public void login() {
-        pause();
         LoginPage.loginFieldAsTextFieldType("login2");
         LoginPage.passwordFieldAsTextFieldType("password2");
         LoginPage.loginButtonClick();
-        pauseShort();
     }
 
     public void logout() {
@@ -52,7 +45,6 @@ public class LoginPageTest extends BasePage {
     @DisplayName("На странице Авторизации представлены необходимые элементы")
     @Test
     public void A_loginPageUITest() {
-        pause();
         LoginPage.fieldsCheck();
     }
 
@@ -63,13 +55,10 @@ public class LoginPageTest extends BasePage {
             "при повторном тапе по полю, клавиатура появляется")
     @Test
     public void B_shouldShowErrorWithEmptyFields() {
-        pause();
         LoginPage.loginButtonClick();
-        onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Логин и пароль не могут быть пустыми")));
+        LoginPage.errorEmptyFieldsChech();
         LoginPage.loginFieldAsTextFieldClick();
         assertTrue(isKeyboardOpenedShellCheck());
-        pauseShort();
         LoginPage.passwordFieldAsTextFieldClick();
         assertTrue(isKeyboardOpenedShellCheck());
         clickBack();
@@ -82,17 +71,14 @@ public class LoginPageTest extends BasePage {
     @DisplayName("При пустом поле появляется сообщение об ошибке")
     @Test
     public void C_shouldShowErrorWithOneEmptyField() {
-        pause();
         LoginPage.loginFieldAsTextFieldType("login");
         LoginPage.loginButtonClick();
-        onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Логин и пароль не могут быть пустыми")));
+        LoginPage.errorEmptyFieldsChech();
 
         LoginPage.loginFieldAsTextFieldClear();
         LoginPage.passwordFieldAsTextFieldType("password");
         LoginPage.loginButtonClick();
-        onView(withText(R.string.empty_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Логин и пароль не могут быть пустыми")));
+        LoginPage.errorEmptyFieldsChech();
         LoginPage.passwordFieldAsTextFieldClear();
     }
 
@@ -101,12 +87,10 @@ public class LoginPageTest extends BasePage {
     @DisplayName("п11,12 При вводе неверных пар логин- пароль появляется поп-ап с текстом \"Неверный логин или пароль\"")
     @Test
     public void D_shouldShowErrorWithWrongValues() {
-        pause();
         LoginPage.loginFieldAsTextFieldType("login");
         LoginPage.passwordFieldAsTextFieldType("password");
         LoginPage.loginButtonClick();
-        onView(withText(R.string.wrong_login_or_password)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Неверный логин или пароль")));
+        LoginPage.errorWrongLoginOrPassword();
     }
 
     @Description("При вводе валидных логин пароль входит в приложение")
@@ -114,12 +98,11 @@ public class LoginPageTest extends BasePage {
     @DisplayName("п13,14,17 Ввод валидных логин пароль, нажать на Войти")
     @Test
     public void E_shouldLogin(){
-        pause();
         LoginPage.titleTextElementCheck();
         LoginPage.loginFieldAsTextFieldType("login2");
         LoginPage.passwordFieldAsTextFieldType("password2");
+        waitUntilKeyboardHide();
         LoginPage.loginButtonClick();
-        pauseShort();
         HeaderPage.logoCheck();
     }
 
@@ -129,7 +112,6 @@ public class LoginPageTest extends BasePage {
     @Test
     public void F_shouldAppStartOnSplashScreenPageWhenUserLogin(){
         SplashScreenPage.screenSplashCheK();
-        pause();
     }
 
     @Description("После авторизации пользователя при перезапуске открывается Главная страница")
@@ -137,7 +119,6 @@ public class LoginPageTest extends BasePage {
     @DisplayName("п18 Открывается главная страница")
     @Test
     public void G_shouldAppStartOnAutorizationPageWhenUserLogOut(){
-        pause();
         HeaderPage.logoCheck();
         logout();
     }
@@ -147,7 +128,6 @@ public class LoginPageTest extends BasePage {
     @DisplayName("п21 Если авторизованным пользователем нажать выход, при повторном запуске отображается страница Авторизации")
     @Test
     public void H_shouldAppStartOnAutorizationPageWhenUserLogOut(){
-        pause();
         LoginPage.titleTextElementCheck();
         login();
     }
@@ -157,7 +137,6 @@ public class LoginPageTest extends BasePage {
     @DisplayName("п20 При повторном запуске приложения после авторизации пользователя приложение запускается под авторизованным пользователем")
     @Test
     public void I_shouldStartAppOnMainPageWhenAutorized(){
-        pause();
         HeaderPage.mainMenuButtonCheck();
         logout();
     }

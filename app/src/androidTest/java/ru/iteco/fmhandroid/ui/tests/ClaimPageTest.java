@@ -1,16 +1,11 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AddNewClaimPage;
 import ru.iteco.fmhandroid.ui.pages.ClaimCard;
@@ -33,16 +28,15 @@ public class ClaimPageTest extends BeforeTestLogin {
         ClaimPage.titleClaimHeaderCheck();
         ClaimPage.filterButtonCheck();
         ClaimPage.addNewClaimButtonCheck();
-       ClaimCard.cardShortCheck();
+        ClaimCard.cardShortCheck();
     }
 
     @Description("Проверка страницы Заявки")
     @Story("Проверка страницы Заявки")
-    @DisplayName("п70,71,73,74 При нажатии на икноку меню на Главной Странице появляется ракрывающееся меню")
+    @DisplayName("п70,71,73,74 При нажатии на карточку заявки открывается подробное описание")
     @Test
     public void shouldOpenClaimCardWenTapClaim(){
-        onView(withIndex(withId(R.id.claim_list_card), 0)).perform(click());
-        pauseShort();
+        ClaimPage.claimTap();
         ClaimCard.claimThemeTitleFullCheck();
     }
 
@@ -75,10 +69,7 @@ public class ClaimPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveHeader(){
         headerCheck();
-        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
-        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
-        pauseShort();
-        onView(withIndex(withId(R.id.plan_date_label_material_text_view), 2)).perform(customSwipeUp());
+        ClaimPage.claimsSwipeUp();
         headerCheck();
     }
 
@@ -89,10 +80,8 @@ public class ClaimPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenAddNewClaimPage(){
         ClaimPage.addNewClaimButtonClick();
-        pauseShort();
         AddNewClaimPage.titleHeaderCheck();
         clickBack();
-        pauseShort();
         ClaimPage.titleClaimHeaderCheck();
     }
 }

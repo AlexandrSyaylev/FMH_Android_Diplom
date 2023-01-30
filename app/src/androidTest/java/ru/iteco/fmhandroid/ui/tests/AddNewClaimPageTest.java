@@ -16,7 +16,7 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
     @DisplayName("п219 При тапе по кнопке Добавить Заявку (+) на странице Заяки открывается страница Создание заявки ")
     public void openNewClaimPage() {
         MainPage.claimAddNewButtonClick();
-        pauseShort();
+        AddNewClaimPage.titleHeaderCheck();
     }
 
     @Description("Страница содержит поля ...")
@@ -62,9 +62,7 @@ public class AddNewClaimPageTest extends BeforeTestLogin {
         AddNewClaimPage.saveButtonClick();
         AddNewClaimPage.emptyFieldMessageCheck();
         AddNewClaimPage.emptyFieldOkButtonClick();
-        pauseShort();
         clickBack();
-        pauseShort();
     }
 
     @Description("При тапе по полю Дата открывается календарь")

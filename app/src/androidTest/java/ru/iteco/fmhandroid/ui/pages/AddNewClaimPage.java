@@ -53,6 +53,7 @@ public class AddNewClaimPage extends BasePage{
 
     @Step("Проверка наличия заголовка Создание страницы")
     public static void titleHeaderCheck(){
+        waitUntilElement(R.id.custom_app_bar_title_text_view);
         titleHeader.check(matches(isDisplayed()));
     }
     @Step("Тапнуть по кнопке Отмена страницы создание заявки")

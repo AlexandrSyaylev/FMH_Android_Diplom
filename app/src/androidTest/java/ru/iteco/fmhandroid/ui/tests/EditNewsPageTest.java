@@ -1,22 +1,16 @@
 package ru.iteco.fmhandroid.ui.tests;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.action.ViewActions.click;
-import static androidx.test.espresso.assertion.ViewAssertions.matches;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
-import static androidx.test.espresso.matcher.ViewMatchers.withText;
-
 import org.junit.Before;
 import org.junit.Test;
 
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.Story;
 import io.qameta.allure.kotlin.junit4.DisplayName;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.BeforeTestLogin;
 import ru.iteco.fmhandroid.ui.pages.AddNewNewsPage;
 import ru.iteco.fmhandroid.ui.pages.HeaderPage;
 import ru.iteco.fmhandroid.ui.pages.MainMenuPage;
+import ru.iteco.fmhandroid.ui.pages.NewsControlPage;
 import ru.iteco.fmhandroid.ui.pages.NewsPage;
 
 public class EditNewsPageTest extends BeforeTestLogin {
@@ -24,9 +18,8 @@ public class EditNewsPageTest extends BeforeTestLogin {
     public void openNewNewsPage() {
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.newsPageButtonClick();
-        pauseShort();
         NewsPage.controlPanelButtonClick();
-        onView(withIndex(withId(R.id.edit_news_item_image_view), 0)).perform(click());
+        NewsControlPage.editButtonClick();
     }
 
     @Description("Страница содержит заголовок \"Редактирование Новости\"")
@@ -50,11 +43,10 @@ public class EditNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.categoryFieldClear();
         AddNewNewsPage.categoryFieldClick();
         AddNewNewsPage.categoryFieldHide();
+        waitUntilKeyboardHide();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
-        pauseShort();
         AddNewNewsPage.cancelButtonClick();
-        pauseSSt();
         AddNewNewsPage.noSaveChangesOkButtonClick();
     }
 
@@ -66,13 +58,9 @@ public class EditNewsPageTest extends BeforeTestLogin {
         AddNewNewsPage.descriptionFieldClick();
         AddNewNewsPage.descriptionFieldClear();
         AddNewNewsPage.descriptionFieldHide();
-        pauseShort();
         AddNewNewsPage.saveButtonClick();
-        onView(withText(R.string.empty_fields)).inRoot(new BeforeTestLogin.ToastMatcher())
-                .check(matches(withText("Заполните пустые поля")));
-        pauseShort();
+        AddNewNewsPage.errorFillEmptyFieldsCheck();
         clickBack();
-        pauseShort();
     }
 
     @Description("При тапе по полю Дата открывается календарь на текущей дате")
@@ -81,10 +69,9 @@ public class EditNewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenCalendarWhenTapDateField(){ //!
         AddNewNewsPage.dateFieldClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         clickBack();
-        pauseShort();
+        AddNewNewsPage.newsAddEditPageLoadWaits();
         clickBack();
     }
 
@@ -94,10 +81,9 @@ public class EditNewsPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenClockWhenTapTimeField(){
         AddNewNewsPage.timeFieldClick();
-        pauseShort();
         AddNewNewsPage.clockBaseCheck();
         clickBack();
-        pauseShort();
+        AddNewNewsPage.newsAddEditPageLoadWaits();
         clickBack();
     }
 }

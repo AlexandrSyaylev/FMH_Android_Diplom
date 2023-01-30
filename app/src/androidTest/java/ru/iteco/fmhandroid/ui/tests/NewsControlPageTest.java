@@ -19,9 +19,7 @@ public class NewsControlPageTest extends BeforeTestLogin {
     public void openControlPage(){
         HeaderPage.mainMenuButtonClick();
         MainMenuPage.newsPageButtonClick();
-        pauseShort();
         NewsPage.controlPanelButtonClick();
-        pauseShort();
     }
 
     @Description("На странице в заголовке блока есть текст \"Панель управления\"...")
@@ -38,7 +36,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
         NewsCard.statusButtonCheck();
 
         NewsCard.newsCardFullDescriptionsCheck();
-        pauseShort();
         NewsCard.newsCardFullClick();
     }
 
@@ -48,7 +45,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenFilterPage(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterBaseCheck();
         NewsControlPage.filterActiveSwitchCheck();
         NewsControlPage.filterInactiveSwitchCheck();
@@ -63,7 +59,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldHaveCategories(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterCategoryClick();
         AddNewNewsPage.categoryDropListCheck();
         clickBack();
@@ -76,13 +71,10 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenCalendarWhenTapDateField(){
         NewsPage.filterButtonClick();
-        pauseShort();
         NewsPage.filterDateStartClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         AddNewNewsPage.timeOKButtonClick();
         NewsPage.filterDateEndClick();
-        pauseShort();
         AddNewNewsPage.calendarBaseCheck();
         AddNewNewsPage.timeOKButtonClick();
         clickBack();
@@ -94,7 +86,6 @@ public class NewsControlPageTest extends BeforeTestLogin {
     @Test
     public void shouldOpenAddNewNewsPAgeWhenTapOnButton(){
         NewsPage.addNewNewsButtonClick();
-        pauseShort();
         AddNewNewsPage.titleCheck("Создание");
         clickBack();
     }
